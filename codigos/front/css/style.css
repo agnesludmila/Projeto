@@ -12,6 +12,83 @@ main {
     height: 480px;
     width: 768px;
     border-radius: 12px;
-    box-shadow: 0 5px 20px #a0a0a0;
+    box-shadow: 0 5px 20px #cecece;
+    overflow: hidden;
+}
 
+.form-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.form {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-items: space-between;
+    align-items: center;
+    padding: 78px 0;
+}
+
+.form-login{
+    background-color: white;
+}
+
+.form-ir{
+    background-color: #B82727;
+}
+
+.form-title{
+    font-size: 3rem;
+    margin-bottom: 42px;
+    font-family: 'Joan', sans-serif;
+    font-weight: 300; 
+    color: #B82727;
+    
+}
+
+.form-title2{
+    font-size: 3rem;
+    margin-bottom: 42px;
+    font-family: 'Joan', sans-serif;
+    font-weight: 300; 
+    color: white;
+    
+}
+
+.form-input{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    margin-bottom: 22px;
+
+}
+
+.form-inputs{
+    width: 315px;
+    height: 45px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #D3D3D3;
+}
+
+.form-button{
+    margin-top: 25px;
+    width: 100px;
+    height: 40px;
+    border-style: none;
+    border-radius: 50px;
+    border: 2px solid #B82727;
+    background-color: transparent;
+    color:#B82727; 
+    font-size: 1rem ;
+    cursor: pointer;
+    transition: .7s;
+}
+
+.form-button:hover {
+    background-color: #B82727; 
+    color: white;               
 }

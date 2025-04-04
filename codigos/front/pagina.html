@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>achados e perdidos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Joan:wght@400&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
     
@@ -11,31 +13,29 @@
 <body>
    <main>
         <div class="login-container">
-                <h1>
-                    Entrar
-                </h1>
-            <label for="email">E-mail:</label> 
-            <input type="email" id="email" name="email" placeholder="seuemail@aluno.uepb.edu.br"> 
+            <div class="form-container">
+                <form class="form form-login">
+                    <h2 class="form-title">Entrar</h2>
+                        <div class="form-input">
+                            <label for="email">E-mail:</label> 
+                            <input type="email" class ="form-inputs" placeholder="seuemail@aluno.uepb.edu.br"> 
+                            <label for="senha">Senha</label> 
+                            <input type="senha" class ="form-inputs" placeholder="*****"> 
+                        </div>
+                        <a href="redefinirSenha.html">Esqueceu a senha</a>
         
-            <label for="senha">Senha</label> 
-            <input type="senha" id="senha" name="senha" placeholder="*****"> 
-        
-            <a href="redefinirSenha.html">Esqueceu a senha</a>
-        
-            <button type="submit">Login</button>
-        </div>
-
-        <div class="cadastro-container">
-            <h2>
-                Seja bem vindo, aluno!
-            </h2>
-        
-            <p>
-                Cadastre-se e terá acesso ao Achados e Perdidos UEPB
-            </p>
-        
-            <a href="cadastro.html">
-                <button>Cadastre-se</button>
+                        <button class="form-button" type="submit">Login</button>
+                </form>
+                <form class="form form-ir">
+                <h2 class="form-title2"> Olá, aluno!</h2>
+                <p class="form-text">
+                    Cadastre-se e terá acesso ao Achados e Perdidos UEPB
+                </p>
+            
+                <a href="cadastro.html">
+                    <button>Cadastre-se</button>
+                </form>
+            </div>
         </div>
    </main>
 </body>
