@@ -9,6 +9,7 @@ main {
 }
 
 .login-container{
+    position: relative;
     height: 480px;
     width: 768px;
     border-radius: 12px;
@@ -46,6 +47,14 @@ main {
     font-family: 'Joan', sans-serif;
     font-weight: 300; 
     color: #B82727;
+    
+}
+.form-title2{
+    font-size: 3rem;
+    margin-bottom: 42px;
+    font-family: 'Joan', sans-serif;
+    font-weight: 300; 
+    color:white;
     
 }
 
@@ -91,4 +100,26 @@ main {
 .form-button:hover {
     background-color: #B82727; 
     color: white;               
+}
+.form-button-light{
+    border: 2px solid #D3D3D3;
+    color:#D3D3D3;
+}
+
+.form-button-light:hover {
+    background-color: white; 
+    color: #B82727;               
+}
+
+.form-text{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family:  'Joan', sans-serif;
+    text-decoration: none;
+    color:  #D3D3D3;
+}
+
+.link-color{
+    color:#B82727;
 }
