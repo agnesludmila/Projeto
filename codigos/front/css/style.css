@@ -36,8 +36,8 @@ main {
     background-color: white;
 }
 
-.form-ir{
-    background-color: #B82727;
+.form-cadastro{
+    background-color:white;
 }
 
 .form-title{
@@ -49,33 +49,33 @@ main {
     
 }
 
-.form-title2{
-    font-size: 3rem;
-    margin-bottom: 42px;
-    font-family: 'Joan', sans-serif;
-    font-weight: 300; 
-    color: white;
-    
-}
-
-.form-input{
+.form-input-container{
     display: flex;
     flex-direction: column;
-    gap:5px;
+    gap: 5px;
     margin-bottom: 22px;
 
 }
 
-.form-inputs{
+.form-input-container2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+
+}
+
+.form-input{
     width: 315px;
-    height: 45px;
-    padding: 10px 20px;
+    height: 40px;
+    padding: 5px 10px;
     border-radius: 5px;
     border: 2px solid #D3D3D3;
 }
 
 .form-button{
-    margin-top: 25px;
+    margin-top: 20px;
     width: 100px;
     height: 40px;
     border-style: none;
