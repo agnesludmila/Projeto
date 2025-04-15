@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/overlay.css">
-    
+    <link rel="stylesheet" href="./css/details.css">
+    <script src="./js/login.js"defer></script>
 </head>
 <body>
    <main>
-        <div class="login-container">
-            <div class="form-container">
+        <div class="login-container" id="login-container">
+            <div class="form-container ">
                 <form class="form form-login">
                     <h2 class="form-title">Entrar</h2>
                         <div class="form-input-container">
@@ -39,11 +40,14 @@
                 </div>
             </div>
             <div class="overlay-container">
-                <div class="overlay">0000</div>
                 <div class="overlay">
-                    <h2 class="form-title2">Olá, Aluno!</h2>
+                    <h2 class="form-title2">Olá, aluno!</h2>
+                    <p class="form-text">Já possui uma conta? faça login com suas informações</p>
+                    <button class="form-button form-button-light" id="entrar" >Entrar</button> </div>
+                <div class="overlay">
+                    <h2 class="form-title2">Bem vindo!</h2>
                     <p class="form-text">Cadastre e tenha acesso ao Achados e Perdidos da UEPB</p>
-                    <button class="form-button form-button-light">Cadastrar-se</button>
+                    <button class="form-button form-button-light" id="cadastrar">Cadastre-se</button> 
                 </div>
             </div>
         </div>

@@ -4,24 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redefinir Senha</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Joan:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/rs.css">
+    <link rel="stylesheet" href="./css/details.css">
+    <script src="./js/login.js"defer></script>
+
 </head>
 <body>
     <main>
-        <pre>
-    <h1>
-    Redefinir Senha
-    </h1>
-    <label for="email">E-mail:</label>
-    <input type="email" id="email" name="email" placeholder="seuemail@aluno.uepb.edu.br">
+        <div class="redefinir-container">
+            <div class="form-container">
+                <form class="form form-tela1">
+                    <img class="form-img" src="c:\Users\agnes\OneDrive\Imagens\Marca-da-UEPB-Aplicacao-Colorida-em-PNG-1.png" alt="Logo">
+                        <p class="form-text">Enviaremos um link para a recuperação da sua conta.</p>
 
-    <button type="submit">Enviar Link de recuperação</button>
-    <p>
-    Enviaremos um link para a recuperação da sua conta.
-    Retorne à tela inicial e faça login novamente.
-    </p>
-    <button onclick="window.location.href='pagina.html'">Entrar</button>
-        </pre>
+                    <a href="pagina.html">
+                        <button type="button" class="form-button form-button-light">Entrar</button>
+                      </a>
+                      
+                </form>
+                <div class="form form-tela2">
+                    <h2 class="form-title">Redefinir Senha</h2>
+                        <div class="form-input-container">
+                            <label for="email">E-mail:</label>
+                            <input class="form-input" type="email" id="email" name="email" placeholder="seuemail@aluno.uepb.edu.br">
+                        </div>
+                    <button class="form-button" type="submit">Enviar Link</button>
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 </html>

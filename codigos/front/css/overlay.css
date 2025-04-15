@@ -8,8 +8,34 @@
     transform: translateX(100%);
     color: #d3d3d3;
     text-align: center;
+    transform: translateX(100%);
+    transition: 1s;
+    z-index: 10;
 
 }
+
+.login-container.move .overlay-container{
+    transform: translateX(0%);
+
+}
+
+.container-redefinir {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color:#B82727;
+    transform: translateX(100%);
+    color: #d3d3d3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+  }
+  
 
 .overlay{
     position: absolute;
@@ -22,6 +48,17 @@
     padding: 55px ;
     background-color: #B82727;
     color: white;
+    transition: 1s;
 
+}
 
+.login-container.move .overlay:nth-child(2){
+    z-index: -1;
+    opacity: 0;
+}
+
+@media (max-width:768px){
+    .overlay-container{
+        display: none;
+    }
 }
