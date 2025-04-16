@@ -17,8 +17,8 @@ Projeto de um sistema web para controle de **achados e perdidos** dentro da univ
 - [x] Interface de cadastro de objetos encontrados
 - [ ] Listagem de itens com filtros por categoria/data
 - [x] Login de usuários (admin e aluno)
-- [ ] Integração com banco de dados (MySQL)
-- [ ] API REST com Spring Boot
+- [x] Integração com banco de dados (MySQL)
+- [x] API REST com Spring Boot
 - [ ] Página para solicitar a retirada de um item
 
 ---
