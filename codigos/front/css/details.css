@@ -8,7 +8,7 @@
 }
 .form-title2{
     font-size: 3rem;
-    margin-bottom: 42px;
+    margin-bottom: 20px;
     font-family: 'Joan', sans-serif;
     font-weight: 300; 
     color:white;
@@ -40,8 +40,24 @@
     border: 2px solid #D3D3D3;
 }
 
+.form-text {
+    padding: 0;
+    width: fit-content; /* ajusta ao conteúdo */
+    margin: 0 auto;     /* centraliza horizontalmente */
+    font-family: 'Joan', sans-serif;
+    text-decoration: none;
+    color: white;
+    text-align: center; /* centraliza o texto */
+    line-height: 1.5em; /* melhora a quebra de linha */
+}
+
+.com-espaco {
+    margin-top: 10px;
+    padding-bottom: 30px;
+}
+
 .form-button{
-    margin-top: 20px;
+    margin-top: 10px;
     width: 100px;
     height: 40px;
     border-style: none;
@@ -68,14 +84,6 @@
     color: #B82727;               
 }
 
-.form-text{
-    margin:0;
-    padding:0;
-    font-family:  'Joan', sans-serif;
-    text-decoration: none;
-    color: white;
-}
-
 .link-color{
     color:#B82727;
 }
@@ -91,3 +99,4 @@
     margin: 0 auto 20px auto; 
     height:131px;
 }
+

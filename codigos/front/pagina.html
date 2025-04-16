@@ -24,19 +24,19 @@
                             <label for="senha">Senha</label> 
                             <input type="password" class ="form-input" placeholder="*****"> 
                         </div>
-                        <a class="link-color" href="redefinirSenha.html">Esqueceu a senha</a>
+                        <a class="link-color" href="redefinirSenha.html" id="linkRedefinir" onclick="prepararRedirecionamento(event)">Esqueceu a senha</a>
         
                         <button class="form-button" type="submit">Entrar</button>
                 </form>
                 <div class="form form-cadastro">
                     <h2 class="form-title">Criar conta</h2>
-                    <div class="form-input-container2">
-                        <input type="text" class ="form-input" placeholder="Nome"> 
-                        <input type="email" class ="form-input" placeholder="E-mail"> 
-                        <input type="password" class ="form-input" placeholder="Senha"> 
-                        <input type="numbers" class ="form-input" placeholder="N° da Matricula"> 
-                        <button class="form-button" type="submit">Cadastre-se</button> 
-                    </div>
+                    <form id="cadastroForm" class="form-input-container2">
+                            <input type="text" class="form-input" id="nome" placeholder="Nome" required> 
+                            <input type="email" class="form-input" id="email" placeholder="E-mail" required> 
+                            <input type="password" class="form-input" id="senha" placeholder="Senha" required> 
+                            <input type="number" class="form-input" id="matricula" placeholder="N° da Matrícula" required> 
+                            <button class="form-button" type="submit">Cadastre-se</button>                        
+                    </form>
                 </div>
             </div>
             <div class="overlay-container">
@@ -52,5 +52,6 @@
             </div>
         </div>
    </main>
+   <script src="./js/login.js"></script>
 </body>
 </html>
