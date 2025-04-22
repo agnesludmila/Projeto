@@ -1,0 +1,59 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: white; 
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.form-box {
+  background-color: white;
+  border-radius: 20px;
+  padding: 50px;
+  height: 400px;
+  width: 350px;
+  box-shadow: 1px 4px 20px 9px rgba(0, 0, 0, 0.1);
+}
+
+
+.perfil-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  margin-top: 120px
+}
+
+.perfil-nome {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.menu-btn {
+  display: block;
+  width: 80%; /* Ajuste a largura para algo menor, se necessário */
+  margin: 20px auto; /* Centraliza horizontalmente e adiciona margem acima e abaixo */
+  padding: 12px;
+  border: none;
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menu-btn:hover {
+  background-color: #d3d3d3;
+}
+
+
+
+

@@ -18,12 +18,14 @@
             <div class="form-container ">
                 <form class="form form-login">
                     <h2 class="form-title">Entrar</h2>
-                        <div class="form-input-container">
+                        <div class="form-input-container" id="loginForm">
                             <label for="email">E-mail:</label> 
-                            <input type="email" class ="form-input" placeholder="seuemail@aluno.uepb.edu.br"> 
+                            <input type="email" id ="email" class ="form-input" placeholder="seuemail@aluno.uepb.edu.br" required /> 
                             <label for="senha">Senha</label> 
-                            <input type="password" class ="form-input" placeholder="*****"> 
+                            <input type="password" id="senha" class ="form-input" placeholder="*****" required /> 
                         </div>
+                        <p id="mensagemLogin"></p>
+
                         <a class="link-color" href="redefinirSenha.html" id="linkRedefinir" onclick="prepararRedirecionamento(event)">Esqueceu a senha</a>
         
                         <button class="form-button" type="submit">Entrar</button>

@@ -1,0 +1,92 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .config-container {
+    max-width: 1000px;
+    margin: auto;
+    background-color: #eee;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 30px;
+  }
+  
+  
+  .profile {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .menu-item {
+    margin-bottom: 10px;
+  }
+  
+  .menu-item button {
+    width: 100%;
+    background-color:f;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.3s;
+    position: relative;
+  }
+  
+  .menu-item button:hover {
+    background-color: #d0d0f5;
+  }
+  
+  .menu-item .arrow {
+    text-decoration: none;
+    font-size: 18px;
+    color: #666;
+    margin-left: 10px;
+  }
+  
+  .arrow:hover {
+    color: #000;
+  }
+  
+  .config-boxes {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  
+  .box {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+  }
+  
+  .box h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #555;
+  }
+  

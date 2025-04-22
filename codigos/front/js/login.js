@@ -57,3 +57,42 @@ function prepararRedirecionamento(event) {
         window.location.href = event.target.href;
     }, 300); 
 }
+
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+  
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+  
+    fetch("http://localhost:8080/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        senha: senha,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.text(); // ou .json() se o backend mandar JSON
+        } else {
+          throw new Error("Login inválido");
+        }
+      })
+      .then((mensagem) => {
+        document.getElementById("mensagemLogin").textContent = mensagem;
+        // redirecionar, se quiser
+        // window.location.href = "/pagina-principal.html";
+      })
+      .catch((error) => {
+        document.getElementById("mensagemLogin").textContent = error.message;
+      });
+  });
+
+  
+  
+  
+  
+  

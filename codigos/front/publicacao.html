@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publicar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Joan:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/publicacao.css">
+  <script src="./js/pub.js"defer></script>
+</head>
+<body>
+  <header>
+    <button class="add-btn">←</button>
+  </header>
+  
+  <div class="container">
+    <div class="form-box">
+      <h2>Publicação</h2>
+
+      <label for="titulo">Título:</label>
+      <input type="text" id="titulo" placeholder="Digite o título do item">
+
+      <label for="descricao">Descrição:</label>
+      <textarea id="descricao" placeholder="Descreva o item encontrado..."></textarea>
+
+      <div class="btn-group">
+        <label for="foto" class="btn-video">
+        Adicionar Midia
+          <input type="file" id="foto" name="foto" accept="image/*,video/*" multiple>
+        </label>
+      </div>
+
+      <div id="preview-container">
+      </div>
+      <button class="btn-publicar">Publicar</button>
+    </div>
+  </div>
+</body>
+</html>
