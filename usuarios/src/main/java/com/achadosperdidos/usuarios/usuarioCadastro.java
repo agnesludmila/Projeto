@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class usuario {
+public class usuarioCadastro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +15,7 @@ public class usuario {
     private String nome;
     private String email;
     private String senha;
+    private String matricula;
 
 
     public String getNome() {
@@ -39,5 +40,13 @@ public class usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 }

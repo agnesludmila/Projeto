@@ -16,19 +16,19 @@ public class usuarioController {
 
     // CREATE
     @PostMapping
-    public usuario criar(@RequestBody usuario usuario) {
+    public usuarioCadastro criar(@RequestBody usuarioCadastro usuario) {
         return usuarioRepository.save(usuario);
     }
 
     // READ ALL
     @GetMapping
-    public List<usuario> listar() {
+    public List<usuarioCadastro> listar() {
         return usuarioRepository.findAll();
     }
 
     // READ BY ID
     @GetMapping("/{id}")
-    public ResponseEntity<usuario> buscar(@PathVariable Long id) {
+    public ResponseEntity<usuarioCadastro> buscar(@PathVariable Long id) {
         return usuarioRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -36,7 +36,7 @@ public class usuarioController {
 
     // UPDATE
     @PutMapping("/{id}")
-    public ResponseEntity<usuario> atualizar(@PathVariable Long id, @RequestBody usuario novoUsuario) {
+    public ResponseEntity<usuarioCadastro> atualizar(@PathVariable Long id, @RequestBody usuarioCadastro novoUsuario) {
         return usuarioRepository.findById(id)
                 .map(usuario -> {
                     usuario.setNome(novoUsuario.getNome());
