@@ -23,21 +23,22 @@ document.getElementById('cadastroForm').addEventListener('submit', function(even
         matricula: matricula
     };
 
+    console.log("enviar," , usuario)
+
     // Envia os dados para a API usando fetch (requisição POST)
     fetch('http://localhost:8080/usuarios', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(usuario), // Converte o objeto para JSON
+        body: JSON.stringify(usuario),
     })
-    .then(response => response.json()) // Espera a resposta da API
+    .then(response => response.json()) 
     .then(data => {
         console.log('Usuário cadastrado com sucesso:', data);
 
         document.getElementById('cadastroForm').reset();
-        // Aqui você pode redirecionar o usuário ou exibir uma mensagem
-        window.location.href='pagina.html';
+        window.location.href='LoginRegister.html';
     })
     .catch((error) => {
         console.error('Erro ao cadastrar usuário:', error);
@@ -49,11 +50,9 @@ document.getElementById('cadastroForm').addEventListener('submit', function(even
 function prepararRedirecionamento(event) {
     event.preventDefault(); 
 
-    // Adiciona a classe fade para iniciar a transição de opacidade (fade out)
     document.body.classList.add('fade');
 
-    setTimeout(function() {
-        // Redireciona manualmente após a transição de fade
+    setTimeout(function(){
         window.location.href = event.target.href;
     }, 300); 
 }
