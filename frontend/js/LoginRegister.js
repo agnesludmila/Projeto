@@ -8,8 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('cadastrar')?.addEventListener('click', moveOverlay);
     document.getElementById('entrar')?.addEventListener('click', moveOverlay);
 
-    function exibirNotificacao(mensagem, sucesso = true) {
+    function exibirNotificacao(mensagem, sucesso = true, tempo = 3000) {
+        // Remove notificações anteriores antes de exibir uma nova
+        const notificacaoAnterior = document.querySelector('.toast-notificacao');
+        if (notificacaoAnterior) {
+            notificacaoAnterior.remove();
+        }
+
         const toast = document.createElement('div');
+        toast.classList.add('toast-notificacao');
+        toast.innerHTML = sucesso ? `✅ ${mensagem}` : `✖️ ${mensagem}`;
+
         Object.assign(toast.style, {
             position: 'fixed',
             bottom: '30px',
@@ -25,30 +34,39 @@ document.addEventListener("DOMContentLoaded", () => {
             transition: 'opacity 0.5s'
         });
 
-        toast.textContent = mensagem;
         document.body.appendChild(toast);
 
         setTimeout(() => { toast.style.opacity = '1'; }, 100);
+
         setTimeout(() => {
             toast.style.opacity = '0';
-            setTimeout(() => document.body.removeChild(toast), 500);
-        }, 3000);
+            setTimeout(() => toast.remove(), 500);
+        }, tempo);
     }
 
     const cadastroForm = document.getElementById('cadastroForm');
     if (cadastroForm) {
         cadastroForm.addEventListener('submit', async (event) => {
             event.preventDefault();
+            const botao = event.submitter;
+            botao.disabled = true;
 
             const usuario = {
-                nome: document.getElementById('nome')?.value,
-                email: document.getElementById('email')?.value,
-                senha: document.getElementById('senha')?.value,
-                matricula: document.getElementById('matricula')?.value
+                nome: document.getElementById('cadastro-nome')?.value,
+                email: document.getElementById('cadastro-email')?.value,
+                senha: document.getElementById('cadastro-senha')?.value,
+                matricula: document.getElementById('cadastro-matricula')?.value
             };
 
             if (Object.values(usuario).some(campo => !campo)) {
                 exibirNotificacao("Todos os campos são obrigatórios!", false);
+                botao.disabled = false;
+                return;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usuario.email)) {
+                exibirNotificacao("Digite um email válido!", false);
+                botao.disabled = false;
                 return;
             }
 
@@ -60,66 +78,65 @@ document.addEventListener("DOMContentLoaded", () => {
                     body: JSON.stringify(usuario),
                 });
 
-                let data;
-                try {
-                    data = await response.json();
-                } catch {
-                    data = {};
-                }
-
+                const resposta = await response.json();
                 if (response.status === 409) {
-                    exibirNotificacao(data?.mensagem ?? "Email já cadastrado!", false);
-                    return;
+                    exibirNotificacao(resposta.mensagem || "Email ou matrícula já cadastrados!", false);
+                } else if (!response.ok) {
+                    exibirNotificacao(resposta.mensagem || "Erro ao cadastrar usuário.", false);
+                } else {
+                    exibirNotificacao(resposta.mensagem || "Usuário cadastrado com sucesso!");
+                    cadastroForm.reset();
+                    setTimeout(() => window.location.href = 'LoginRegister.html', 2000);
                 }
-
-                if (!response.ok) {
-                    exibirNotificacao(data?.mensagem ?? "Erro ao cadastrar usuário.", false);
-                    return;
-                }
-
-                exibirNotificacao(data?.mensagem ?? "Usuário cadastrado com sucesso!");
-                cadastroForm.reset();
-                setTimeout(() => window.location.href = 'LoginRegister.html', 2000);
             } catch (error) {
                 console.error('Erro ao cadastrar usuário:', error);
                 exibirNotificacao("Erro ao cadastrar usuário. Tente novamente.", false);
+            } finally {
+                botao.disabled = false;
             }
         });
     }
 
-    const loginForm = document.getElementById("loginForm");
+    const loginForm = document.getElementById('loginForm');
     if (loginForm) {
-        loginForm.addEventListener("submit", async (event) => {
+        loginForm.addEventListener('submit', async (event) => {
             event.preventDefault();
+            const botao = event.submitter;
+            botao.disabled = true;
 
             const credenciais = {
-                email: document.getElementById("email")?.value,
-                senha: document.getElementById("senha")?.value
+                email: document.getElementById('login-email')?.value,
+                senha: document.getElementById('login-senha')?.value
             };
 
             if (!credenciais.email || !credenciais.senha) {
                 exibirNotificacao("Preencha email e senha!", false);
+                botao.disabled = false;
                 return;
             }
 
             exibirNotificacao("Autenticando...");
             try {
-                const response = await fetch("http://localhost:8080/login", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                const response = await fetch('http://localhost:8080/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(credenciais),
                 });
 
                 const mensagem = await response.text();
-
                 if (response.ok && mensagem === "Login bem-sucedido!") {
                     exibirNotificacao(mensagem);
-                    setTimeout(() => window.location.href = "/pagina-principal.html", 2000);
+                    setTimeout(() => window.location.href = "/MAP/frontend/Profile.html", 2000);
+                } else if (response.status === 401) {
+                    exibirNotificacao(mensagem || "Email ou senha inválidos!", false);
                 } else {
                     exibirNotificacao(mensagem || "Erro ao autenticar.", false);
                 }
             } catch (error) {
-                exibirNotificacao("Erro ao autenticar. Verifique seus dados.", false);
+                console.error('Erro ao autenticar:', error);
+                exibirNotificacao("Erro ao autenticar. Tente novamente.", false);
+            } finally {
+                botao.disabled = false;
             }
         });
     }

@@ -5,14 +5,21 @@ import jakarta.persistence.*;
 @Entity
 public class Usuario {
 
-    private String nome;
-    private String email;
-    private String senha;
-    private String matricula;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String nome;
+
+    @Column(unique = true)
+    private String email;
+
+    private String senha;
+
+    @Column(unique = true)
+    private String matricula;
+
+    // Getters e Setters
 
     public Long getId() {
         return id;
@@ -53,8 +60,4 @@ public class Usuario {
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
-
-
-
-    // Getters e Setters
 }

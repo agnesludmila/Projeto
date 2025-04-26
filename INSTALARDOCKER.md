@@ -42,6 +42,9 @@ docker ps
 ```
 - Você verá os containers rodando, incluindo um chamado `bd-achados-e-perdidos`.
 
+- CONTAINER ID   IMAGE         COMMAND                  CREATED        STATUS         PORTS                    NAMES
+Se aparecer isso, significa que o container não está rodando.
+
 ---
 
 ## 6. Acessar o Banco de Dados Dentro do Container

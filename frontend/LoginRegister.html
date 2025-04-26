@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>achados e perdidos</title>
+    <title>Achados e Perdidos</title>
     <link href="https://fonts.googleapis.com/css2?family=Joan:wght@400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./css/reset.css">
@@ -13,46 +13,51 @@
     <script src="./js/LoginRegister.js" defer></script>
 </head>
 <body>
-   <main>
-        <div class="login-container" id="login-container">
-            <div class="form-container ">
-                <form class="form form-login">
-                    <h2 class="form-title">Entrar</h2>
-                        <div class="form-input-container" id="loginForm">
-                            <label for="email">E-mail:</label>
-                            <input type="email" id ="emaill" class ="form-input" placeholder="seuemail@aluno.uepb.edu.br" required />
-                            <label for="senha">Senha</label>
-                            <input type="password" id="senhal" class ="form-input" placeholder="*****" required />
-                        </div>
-                        <p id="mensagemLogin"></p>
-
-                        <a class="link-color" href="ResetPassword.html" id="linkRedefinir" onclick="prepararRedirecionamento(event)">Esqueceu a senha</a>
-
-                        <button class="form-button" type="submit">Entrar</button>
-                </form>
-                <div class="form form-cadastro">
-                    <h2 class="form-title">Criar conta</h2>
-                    <form id="cadastroForm" class="form-input-container2">
-                            <input type="text" class="form-input" id="nome" placeholder="Nome" required>
-                            <input type="email" class="form-input" id="email" placeholder="E-mail" required>
-                            <input type="password" class="form-input" id="senha" placeholder="Senha" required>
-                            <input type="number" class="form-input" id="matricula" placeholder="N° da Matrícula" required>
-                            <button class="form-button" type="submit">Cadastre-se</button>
-                    </form>
+<main>
+    <div class="login-container" id="login-container">
+        <div class="form-container">
+            <!-- Formulário de Login -->
+            <form id="loginForm" class="form form-login">
+                <h2 class="form-title">Entrar</h2>
+                <div class="form-input-container">
+                    <label for="login-email">E-mail:</label>
+                    <input type="email" id="login-email" class="form-input" placeholder="seuemail@aluno.uepb.edu.br" required />
+                    <label for="login-senha">Senha:</label>
+                    <input type="password" id="login-senha" class="form-input" placeholder="*****" required />
                 </div>
+                <p id="mensagemLogin"></p>
+
+                <a class="link-color" href="ResetPassword.html" id="linkRedefinir" onclick="prepararRedirecionamento(event)">Esqueceu a senha?</a>
+
+                <button class="form-button" type="submit">Entrar</button>
+            </form>
+
+            <!-- Formulário de Cadastro -->
+            <form id="cadastroForm" class="form form-cadastro">
+                <h2 class="form-title">Criar conta</h2>
+                <div class="form-input-container2">
+                    <input type="text" id="cadastro-nome" class="form-input" placeholder="Nome" required>
+                    <input type="email" id="cadastro-email" class="form-input" placeholder="E-mail" required>
+                    <input type="password" id="cadastro-senha" class="form-input" placeholder="Senha" required>
+                    <input type="number" id="cadastro-matricula" class="form-input" placeholder="N° da Matrícula" required>
+                    <button class="form-button" type="submit">Cadastre-se</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <h2 class="form-title2">Olá, aluno!</h2>
+                <p class="form-text">Já possui uma conta? Faça login com suas informações.</p>
+                <button class="form-button form-button-light" id="entrar">Entrar</button>
             </div>
-            <div class="overlay-container">
-                <div class="overlay">
-                    <h2 class="form-title2">Olá, aluno!</h2>
-                    <p class="form-text">Já possui uma conta? faça login com suas informações</p>
-                    <button class="form-button form-button-light" id="entrar" >Entrar</button> </div>
-                <div class="overlay">
-                    <h2 class="form-title2">Bem vindo!</h2>
-                    <p class="form-text">Cadastre e tenha acesso ao Achados e Perdidos da UEPB</p>
-                    <button class="form-button form-button-light" id="cadastrar">Cadastre-se</button>
-                </div>
+            <div class="overlay">
+                <h2 class="form-title2">Bem-vindo!</h2>
+                <p class="form-text">Cadastre-se e tenha acesso ao Achados e Perdidos da UEPB.</p>
+                <button class="form-button form-button-light" id="cadastrar">Cadastre-se</button>
             </div>
         </div>
-   </main>
+    </div>
+</main>
 </body>
 </html>

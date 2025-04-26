@@ -22,24 +22,38 @@ public class UsuarioController {
 
     @PostMapping("/usuarios")
     public ResponseEntity<Map<String, String>> cadastrarUsuario(@RequestBody Usuario usuario) {
-        Optional<Usuario> usuarioExistente = usuarioRepository.findByEmail(usuario.getEmail());
-
         Map<String, String> resposta = new HashMap<>();
 
-        if (usuarioExistente.isPresent()) {
+        // Verifica se o email já está cadastrado
+        Optional<Usuario> usuarioPorEmail = usuarioRepository.findByEmail(usuario.getEmail());
+        if (usuarioPorEmail.isPresent()) {
             resposta.put("mensagem", "Email já cadastrado!");
             return ResponseEntity.status(HttpStatus.CONFLICT).body(resposta);
         }
 
+        // Verifica se a matrícula já está cadastrada
+        Optional<Usuario> usuarioPorMatricula = usuarioRepository.findByMatricula(usuario.getMatricula());
+        if (usuarioPorMatricula.isPresent()) {
+            resposta.put("mensagem", "Matrícula já cadastrada!");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(resposta);
+        }
+
+        // Salva o novo usuário
         usuarioRepository.save(usuario);
         resposta.put("mensagem", "Usuário cadastrado com sucesso!");
         return ResponseEntity.ok(resposta);
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody Usuario usuario) {
-        return usuarioRepository.findByEmailAndSenha(usuario.getEmail(), usuario.getSenha())
-                .map(u -> "Login bem-sucedido!")
-                .orElse("Email ou senha inválidos");
+    public ResponseEntity<String> login(@RequestBody Usuario usuario) {
+        boolean autenticado = usuarioRepository
+                .findByEmailAndSenha(usuario.getEmail(), usuario.getSenha())
+                .isPresent();
+
+        if (autenticado) {
+            return ResponseEntity.ok("Login bem-sucedido!");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email ou senha inválidos!");
+        }
     }
 }
