@@ -1,0 +1,18 @@
+  version: '3.8'
+
+  services:
+    db:
+      image: postgres:15
+      container_name: bd-achados-e-perdidos
+      restart: always
+      environment:
+        POSTGRES_DB: achados-e-perdidos
+        POSTGRES_USER: usuario
+        POSTGRES_PASSWORD: senha
+      ports:
+        - "5432:5432"
+      volumes:
+        - pgdata:/var/lib/postgresql/data
+
+  volumes:
+    pgdata:
