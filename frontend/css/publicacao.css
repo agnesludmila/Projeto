@@ -1,77 +1,71 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: white; 
-    padding: 0;
-  }
-  
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70vh;
-  }
-  
-  .form-box {
-    background-color: white;
-    border-radius: 10px;
-    padding: 30px;
-    min-height: 400px;
-    height: auto;
-    width: 820px;
-    box-shadow: 1px 4px 20px 9px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease; /* para suavizar a expansão/contração */
-    display: inline-block; /* se quiser que ela só cresça conforme o conteúdo */
-  }
-  
-  h2 {
-    margin-bottom: 20px;
-    color: #B82727;
-  }
-  
-  label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-    color: #B82727;
-  }
-  
-  input[type="text"],
-  textarea {
-    width: 97%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    resize: none;
-  }
-  
-  textarea {
-    font-family: Arial, sans-serif;
-    height: 80px;
-  }
-  
-  .btn-group {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-  }
-  
-  button {
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    background-color: #B82727;
-    color: white;
-    transition: background-color 0.3s, transform 0.1s;
-  }
-  button:active {
-    background-color: #B82727;
-    transform: scale(0.97);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-  }
+  font-family: Arial, sans-serif;
+  background-color: white;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.form-box {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  min-height: 400px;
+  height: auto;
+  width: 820px;
+  box-shadow: 1px 4px 30px 9px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #B82727;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #B82727;
+}
+
+input[type="text"],
+textarea {
+  width: 97%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: none;
+}
+
+textarea {
+  font-family: Arial, sans-serif;
+  height: 80px;
+}
+
+.btn-group {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  border: none;
+  padding: 5px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: transparent;
+  color: #B82727;
+  float: right;
+}
 
 /* Estilo do botão */
 .btn-video {
@@ -109,31 +103,30 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Estilo dos itens de preview */
 .preview-item {
   position: relative;
   width: 180px;
   height: 200px;
   overflow: hidden;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra */
-  transition: transform 0.3s ease; /* Efeito de ampliação */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 .preview-item:hover {
-  transform: scale(1.05); /* Ampliação ao passar o mouse */
+  transform: scale(1.05);
 }
 
 .preview-item img,
 .preview-item video {
   width: 100%;
-  height: 100%; /* <--- ocupa toda a altura do .preview-item */
+  height: 100%;
   object-fit: cover;
   border-radius: 8px;
   border: 2px solid #ccc;
 }
 
-/* Estilo para o nome do arquivo */
+
 .preview-item span {
   display: block;
   margin-top: 8px;
@@ -142,7 +135,7 @@ body {
   color: #333;
 }
 
-/* Botão de exclusão */
+
 .delete-btn {
   position: absolute;
   top: -6px;
@@ -177,6 +170,9 @@ body {
 .btn-publicar:hover {
   background-color: #B82727;
 }
+
+
+
 
 
   
