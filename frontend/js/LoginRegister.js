@@ -64,8 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usuario.email)) {
-                exibirNotificacao("Digite um email válido!", false);
+            if (!/^[^\s@]+@aluno\.uepb\.edu\.br$/.test(usuario.email)) {
+                exibirNotificacao("Digite um email institucional válido da UEPB!", false);
                 botao.disabled = false;
                 return;
             }
@@ -79,12 +79,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 const resposta = await response.json();
+
+                // Verifica o código retornado no backend e exibe a notificação apropriada
                 if (response.status === 409) {
-                    exibirNotificacao(resposta.mensagem || "Email ou matrícula já cadastrados!", false);
+                    if (resposta.codigo === 1) {
+                        exibirNotificacao("Email já cadastrado!", false);
+                    } else if (resposta.codigo === 2) {
+                        exibirNotificacao("Matrícula já cadastrada!", false);
+                    } else {
+                        exibirNotificacao(resposta.mensagem || "Email ou matrícula já cadastrados!", false);
+                    }
                 } else if (!response.ok) {
                     exibirNotificacao(resposta.mensagem || "Erro ao cadastrar usuário.", false);
                 } else {
-                    exibirNotificacao(resposta.mensagem || "Usuário cadastrado com sucesso!");
+                    exibirNotificacao(resposta.mensagem || "Usuário cadastrado com sucesso. Verifique o email para ativar sua conta!");
                     cadastroForm.reset();
                     setTimeout(() => window.location.href = 'LoginRegister.html', 2000);
                 }

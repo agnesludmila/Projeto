@@ -19,7 +19,25 @@ public class Usuario {
     @Column(unique = true)
     private String matricula;
 
-    // Getters e Setters
+    private Boolean token = false;
+
+    @Column(unique = true)
+    private String tokenAtivacao;
+
+    public String getTokenAtivacao(){
+        return tokenAtivacao;
+    }
+
+    public void setTokenAtivacao(String tokenAtivacao){
+        this.tokenAtivacao = tokenAtivacao;
+    }
+    public Boolean getToken() {
+        return token;
+    }
+
+    public void setToken(Boolean token) {
+        this.token = token;
+    }
 
     public Long getId() {
         return id;
