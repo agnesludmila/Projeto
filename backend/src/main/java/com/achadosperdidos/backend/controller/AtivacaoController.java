@@ -28,7 +28,7 @@ public class AtivacaoController {
         String token = request.get("token");
 
         // Verifica se o token de ativação é válido
-        Optional<Usuario> usuarioOpt = usuarioRepository.findByTokenAtivacao(token);
+        Optional<Usuario> usuarioOpt = usuarioRepository.findByToken(token);
 
         if (usuarioOpt.isEmpty()) {
             resposta.put("codigo", 1);
@@ -39,8 +39,8 @@ public class AtivacaoController {
         Usuario usuario = usuarioOpt.get();
 
         // Marca a conta como ativada
-        usuario.setToken(true);  // Assume que 'setToken' marca a conta como ativa
-        usuario.setTokenAtivacao(null); // Remove o token após a ativação
+        usuario.setAtivo(true);
+        usuario.setToken(null);
         usuarioRepository.save(usuario);
 
         resposta.put("codigo", 0);

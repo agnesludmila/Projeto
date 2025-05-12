@@ -19,24 +19,24 @@ public class Usuario {
     @Column(unique = true)
     private String matricula;
 
-    private Boolean token = false;
+    private Boolean ativo = false;
 
     @Column(unique = true)
-    private String tokenAtivacao;
+    private String token;
 
-    public String getTokenAtivacao(){
-        return tokenAtivacao;
-    }
-
-    public void setTokenAtivacao(String tokenAtivacao){
-        this.tokenAtivacao = tokenAtivacao;
-    }
-    public Boolean getToken() {
+    public String getToken(){
         return token;
     }
 
-    public void setToken(Boolean token) {
+    public void setToken(String token){
         this.token = token;
+    }
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 
     public Long getId() {

@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.achadosperdidos.backend.service.EmailService;
+import com.achadosperdidos.backend.service.ActivationEmailService;
 
 
 
@@ -20,7 +20,7 @@ import java.util.UUID;
 public class UsuarioController {
 
     @Autowired
-    private EmailService emailService;
+    private ActivationEmailService activationEmailService;
 
     private final UsuarioRepository usuarioRepository;
 
@@ -28,7 +28,7 @@ public class UsuarioController {
         this.usuarioRepository = usuarioRepository;
     }
 
-    @PostMapping("/usuarios")
+    @PostMapping("/cadastro")
     public ResponseEntity<Map<String, Object>> cadastrarUsuario(@RequestBody Usuario usuario) {
         Map<String, Object> resposta = new HashMap<>();
 
@@ -50,9 +50,9 @@ public class UsuarioController {
         }
 
         // Salva o novo usuário
-        usuario.setTokenAtivacao(UUID.randomUUID().toString());
+        usuario.setToken(UUID.randomUUID().toString());
         usuarioRepository.save(usuario);
-        emailService.enviarEmailAtivacao(usuario.getEmail(), usuario.getTokenAtivacao());
+        activationEmailService.enviarEmailAtivacao(usuario.getEmail(), usuario.getToken());
 
         resposta.put("codigo", 0);  // Código 0 para sucesso
         resposta.put("mensagem", "Usuário cadastrado com sucesso. Verifique o email para ativar sua conta!");
@@ -68,7 +68,7 @@ public class UsuarioController {
             Usuario usuarioEncontrado = usuarioOptional.get();
 
             // Verifica se o usuário está ativado
-            if (!usuarioEncontrado.getToken()) {
+            if (!usuarioEncontrado.getAtivo()) {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Conta ainda não ativada.");
             }
 

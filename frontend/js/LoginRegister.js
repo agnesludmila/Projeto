@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             exibirNotificacao("Cadastrando usuário...");
             try {
-                const response = await fetch('http://localhost:8080/usuarios', {
+                const response = await fetch('http://localhost:8080/cadastro', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(usuario),
