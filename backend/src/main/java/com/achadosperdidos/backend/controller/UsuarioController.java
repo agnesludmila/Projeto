@@ -5,6 +5,10 @@ import com.achadosperdidos.backend.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.achadosperdidos.backend.service.EmailService;
+
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,8 +16,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*") // Permite chamadas do front
+
 public class UsuarioController {
+
+    @Autowired
+    private EmailService emailService;
 
     private final UsuarioRepository usuarioRepository;
 
@@ -45,6 +52,8 @@ public class UsuarioController {
         // Salva o novo usuário
         usuario.setTokenAtivacao(UUID.randomUUID().toString());
         usuarioRepository.save(usuario);
+        emailService.enviarEmailAtivacao(usuario.getEmail(), usuario.getTokenAtivacao());
+
         resposta.put("codigo", 0);  // Código 0 para sucesso
         resposta.put("mensagem", "Usuário cadastrado com sucesso. Verifique o email para ativar sua conta!");
         return ResponseEntity.ok(resposta);
@@ -52,14 +61,21 @@ public class UsuarioController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Usuario usuario) {
-        boolean autenticado = usuarioRepository
-                .findByEmailAndSenha(usuario.getEmail(), usuario.getSenha())
-                .isPresent();
+        Optional<Usuario> usuarioOptional = usuarioRepository
+                .findByEmailAndSenha(usuario.getEmail(), usuario.getSenha());
 
-        if (autenticado) {
+        if (usuarioOptional.isPresent()) {
+            Usuario usuarioEncontrado = usuarioOptional.get();
+
+            // Verifica se o usuário está ativado
+            if (!usuarioEncontrado.getToken()) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Conta ainda não ativada.");
+            }
+
             return ResponseEntity.ok("Login bem-sucedido!");
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email ou senha inválidos!");
         }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email ou senha inválidos!");
     }
+
 }

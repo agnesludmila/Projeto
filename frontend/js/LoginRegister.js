@@ -137,6 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     setTimeout(() => window.location.href = "/MAP/frontend/Profile.html", 2000);
                 } else if (response.status === 401) {
                     exibirNotificacao(mensagem || "Email ou senha inválidos!", false);
+                } else if (response.status === 403) {
+                    exibirNotificacao(mensagem || "Por favor, ative a sua conta primeiro!", false);
                 } else {
                     exibirNotificacao(mensagem || "Erro ao autenticar.", false);
                 }

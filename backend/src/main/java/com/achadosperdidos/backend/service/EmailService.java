@@ -12,8 +12,8 @@ public class EmailService {
     private JavaMailSender mailSender;
 
     public void enviarEmailAtivacao(String destinatario, String tokenAtivacao) {
-        String assunto = "Ative sua conta";
-        String link = "http://localhost:8080/ativar?token=" + tokenAtivacao;
+        String assunto = "Ativar conta do Achados e Perdidos";
+        String link = "http://localhost:63342/MAP/frontend/Activation.html?token=" + tokenAtivacao;
 
         String corpo = """
             Olá!
