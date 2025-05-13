@@ -56,7 +56,7 @@ public class ResetController {
     public ResponseEntity<Map<String, Object>> redefinirSenha(@RequestBody Map<String, String> request) {
         Map<String, Object> resposta = new HashMap<>();
 
-        // Pega o token e a nova senha do corpo da requisição
+
         String token = request.get("token");
         String novaSenha = request.get("novaSenha");
 
