@@ -1,12 +1,11 @@
 .form-title{
     font-size: 3rem;
     margin-bottom: 42px;
-    font-family: 'Joan', sans-serif;
+    font-family: 'Istok Web', sans-serif;
     font-weight: 300; 
     color: #B82727;
-    
 }
-.form-title2{
+.form-title-red{
     font-size: 3rem;
     margin-bottom: 20px;
     font-family: 'Joan', sans-serif;
@@ -42,13 +41,13 @@
 
 .form-text {
     padding: 0;
-    width: fit-content; /* ajusta ao conteúdo */
-    margin: 0 auto;     /* centraliza horizontalmente */
+    width: fit-content;
+    margin: 0 auto;
     font-family: 'Joan', sans-serif;
     text-decoration: none;
     color: white;
-    text-align: center; /* centraliza o texto */
-    line-height: 1.5em; /* melhora a quebra de linha */
+    text-align: center;
+    line-height: 1.5em;
 }
 
 .com-espaco {
@@ -91,12 +90,5 @@
 .link-color-red{
     color:white;
 }
-.form-img{
-    position: relative;
-    top: -20px;
-    width:84px;
-    display: block;
-    margin: 0 auto 20px auto; 
-    height:131px;
-}
+
 

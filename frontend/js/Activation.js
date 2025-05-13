@@ -4,21 +4,20 @@
     const resultadoDiv = document.getElementById('resultado');
 
     if (!token) {
-        resultadoDiv.textContent = "Token de ativação inválido.";
+        resultadoDiv.textContent = "⚠️ O link de ativação é inválido ou expirou.";
         resultadoDiv.classList.add('erro');
         return;
     }
 
     try {
         const response = await fetch("http://localhost:8080/ativacao", {
-            method: "POST",  // Usando POST
+            method: "POST",
             headers: {
-                "Content-Type": "application/json"  // Especificando que estamos enviando JSON
+                "Content-Type": "application/json"
             },
-            body: JSON.stringify({ token })  // Envia o token no corpo da requisição
+            body: JSON.stringify({ token })
         });
 
-        // Verifica se a resposta é JSON
         const mensagem = await response.json().catch(() => {
             return { mensagem: "Erro desconhecido." };
         });

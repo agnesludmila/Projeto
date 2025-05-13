@@ -4,32 +4,88 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Página Inicial</title>
-  <link rel="stylesheet" href="./css/inicial.css">
+  <link rel="stylesheet" href="css/main-page.css">
+  <script src="./js/Post.js"defer></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <button class="add-btn">← Voltar</button>
-    </header>
-
-    <div class="search-bar">
-      <input type="text" placeholder="Buscar item">
+<div class="container">
+  <header>
+    <div class="search-wrapper">
+      <button id="searchToggle" class="search-icon">🔍</button>
+      <input typ="text" id="searchInput" class="search-input" placeholder="Buscar...">
+    </div>
+  </header>
+  <div class="form-box-principal">
+    <div class="post">
+      <div class="post-box" id="postBox">
+        <div class="perfil-img">
+          <img src="profile.jpg" alt="Foto de Perfil">
+        </div>
+        <textarea id="inputPost" placeholder="Item perdido/encontrado.." readonly></textarea>
+      </div>
     </div>
 
-    <div class="search-bar">
-      <input type="text" placeholder="Filtros de pesquisa">
+    <h2>Itens recentes</h2>
+
+    <div class="gallery-grid">
+      <div class="item-card" onclick="abrirVisualizacao('img/img1.jpg', 'Fones de ouvido', 'Encontrado na biblioteca.', 'Ana Souza')">
+        <img src="img/img1.jpg" alt="Item publicado">
+      </div>
+      <div class="item-card" onclick="abrirVisualizacao('img/img2.jpg', 'Cartão de estudante', 'Achado próximo ao RU.', 'Lucas Ribeiro')">
+        <img src="img/img2.jpg" alt="Item publicado">
+      </div>
     </div>
 
-    <h4>Itens recentes:</h4>
-    <div class="card-grid">
-      <div class="item-card"><img src="img.jpg" alt="Item 1"></div>
-      <div class="item-card"><img src="img.jpg" alt="Item 2"></div>
-      <div class="item-card"><img src="img.jpg" alt="Item 3"></div>
-      <div class="item-card"><img src="img.jpg" alt="Item 4"></div>
-      <div class="item-card"><img src="img.jpg" alt="Item 5"></div>
-      <div class="item-card"><img src="img.jpg" alt="Item 6"></div>
+    <div id="visualizacaoModal" class="visualizacao-modal">
+      <div class="visualizacao-content">
+        <span class="close" onclick="fecharVisualizacao()">&times;</span>
+        <div class="usuario-info">
+          <p class="usuario-nome" id="visualizacao-usuario"></p>
+        </div>
+        <h3 id="visualizacao-titulo"></h3>
+
+        <p id="visualizacao-descricao"></p>
+
+        <div class="item-foto">
+          <img id="visualizacao-img" src="" alt="Imagem do item">
+        </div>
+      </div>
     </div>
 
+
+    <div id="modalPublicacao" class="modal-overlay">
+      <div class="modal-content">
+        <div class="form-box">
+          <div class="modal-header">
+            <h2 class="titulo-central">Criar publicação</h2>
+            <button id="closeModalBtn" class="close-button">✖</button>
+          </div>
+
+
+
+          <label for="titulo">Título:</label>
+          <input type="text" id="titulo" placeholder="Digite o título do item">
+
+          <label for="descricao">Descrição:</label>
+          <textarea id="descricao" placeholder="Descreva o item encontrado..."></textarea>
+
+
+          <div class="btn-group">
+            <label for="foto" class="btn-video">
+              Adicionar Mídia
+              <input type="file" id="foto" accept="image/*,video/*" multiple>
+            </label>
+          </div>
+
+          <div id="preview-container"></div>
+
+          <button class="btn-publicar">Publicar</button>
+
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 </body>
 </html>

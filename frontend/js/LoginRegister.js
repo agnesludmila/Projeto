@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const mensagem = await response.text();
                 if (response.ok && mensagem === "Login bem-sucedido!") {
                     exibirNotificacao(mensagem);
-                    setTimeout(() => window.location.href = "/MAP/frontend/Profile.html", 2000);
+                    setTimeout(() => window.location.href = "/MAP/frontend/Main.html", 2000);
                 } else if (response.status === 401) {
                     exibirNotificacao(mensagem || "Email ou senha inválidos!", false);
                 } else if (response.status === 403) {
