@@ -51,4 +51,39 @@ public class ResetController {
         resposta.put("mensagem", "Um link de redefinição de senha foi enviado para seu e-mail.");
         return ResponseEntity.ok(resposta);
     }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<Map<String, Object>> redefinirSenha(@RequestBody Map<String, String> request) {
+        Map<String, Object> resposta = new HashMap<>();
+
+        // Pega o token e a nova senha do corpo da requisição
+        String token = request.get("token");
+        String novaSenha = request.get("novaSenha");
+
+        if (token == null || token.isEmpty() || novaSenha == null || novaSenha.isEmpty()) {
+            resposta.put("codigo", 1); //
+            resposta.put("mensagem", "Token ou nova senha não fornecidos.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resposta);
+        }
+
+        Optional<Usuario> usuarioOpt = usuarioRepository.findByToken(token);
+
+        if (usuarioOpt.isEmpty()) {
+            resposta.put("codigo", 1);
+            resposta.put("mensagem", "Token inválido ou expirado.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resposta);
+        }
+
+        Usuario usuario = usuarioOpt.get();
+
+        // Atualiza a senha do usuário
+        usuario.setSenha(novaSenha);
+        usuario.setToken(null);  // Limpar o token após redefinir a senha
+        usuarioRepository.save(usuario);
+
+        resposta.put("codigo", 0);
+        resposta.put("mensagem", "Senha atualizada com sucesso.");
+        return ResponseEntity.ok(resposta);
+    }
+
 }

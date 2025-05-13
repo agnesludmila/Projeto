@@ -1,49 +1,60 @@
-document.addEventListener('DOMContentLoaded', function () {
+(async () => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    const form = document.querySelector('form');
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirm-password');
-    const resetButton = document.querySelector('.form-button');
-    const passwordError = document.getElementById('password-error');
-    const confirmPasswordError = document.getElementById('confirm-password-error');
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    // Verifica se o token está presente na URL
+    if (!token) {
+        exibirNotificacao("⚠️ O link de redefinição é inválido ou expirou.", false);
+        form.style.display = 'none';
+        return;
+    }
 
-    // Validação em tempo real dos campos de senha
-    passwordInput.addEventListener('input', handleInputValidation);
-    confirmPasswordInput.addEventListener('input', handleInputValidation);
-
-    resetButton.addEventListener('click', function (event) {
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        handleResetPassword();
+
+        const novaSenha = passwordInput.value.trim();
+        const confirmarSenha = confirmPasswordInput.value.trim();
+
+        if (!novaSenha || !confirmarSenha) {
+            exibirNotificacao("Por favor, preencha todos os campos.", false);
+            return;
+        }
+
+        if (novaSenha !== confirmarSenha) {
+            exibirNotificacao("As senhas não coincidem.", false);
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:8080/auth/reset-password", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ token, novaSenha })
+            });
+
+            const data = await response.json().catch(() => {
+                return { mensagem: "Erro desconhecido." };
+            });
+
+            if (response.ok && data.codigo === 0) {
+                exibirNotificacao(data.mensagem || "Senha redefinida com sucesso!");
+                form.reset();
+                setTimeout(() => window.location.href = "/MAP/frontend/LoginRegister.html", 3000);
+            } else {
+                exibirNotificacao(data.mensagem || "Erro ao redefinir a senha.", false);
+            }
+        } catch (error) {
+            console.error("Erro ao redefinir senha:", error);
+            exibirNotificacao("Erro de conexão. Tente novamente mais tarde.", false);
+        }
     });
 
-    function handleInputValidation() {
-        validatePassword();
-        validateConfirmPassword();
-    }
-
-    function validatePassword() {
-        const password = passwordInput.value;
-
-        if (!passwordRegex.test(password)) {
-            passwordError.textContent = "A senha deve ter pelo menos 8 caracteres, incluir maiúsculas e minúsculas.";
-            passwordError.style.display = "block";
-        } else {
-            passwordError.style.display = "none";
-        }
-    }
-
-    function validateConfirmPassword() {
-        const password = passwordInput.value;
-        const confirmPassword = confirmPasswordInput.value;
-
-        if (confirmPassword !== password) {
-            confirmPasswordError.textContent = "As senhas não coincidem.";
-            confirmPasswordError.style.display = "block";
-        } else {
-            confirmPasswordError.style.display = "none";
-        }
-    }
-
+    // Define a função exibirNotificacao
     function exibirNotificacao(mensagem, sucesso = true, tempo = 3000) {
         const notificacaoAnterior = document.querySelector('.toast-notificacao');
         if (notificacaoAnterior) {
@@ -55,7 +66,17 @@ document.addEventListener('DOMContentLoaded', function () {
         toast.innerHTML = sucesso ? `✅ ${mensagem}` : `✖️ ${mensagem}`;
 
         Object.assign(toast.style, {
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            padding: '10px 20px',
+            borderRadius: '5px',
             backgroundColor: sucesso ? '#4CAF50' : '#f44336',
+            color: 'white',
+            fontWeight: 'bold',
+            zIndex: 1000,
+            opacity: '0',
+            transition: 'opacity 0.5s ease'
         });
 
         document.body.appendChild(toast);
@@ -67,55 +88,4 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(() => toast.remove(), 500);
         }, tempo);
     }
-
-    function handleResetPassword() {
-        const password = passwordInput.value.trim();
-        const confirmPassword = confirmPasswordInput.value.trim();
-
-        // Validação das senhas
-        if (isValidPassword(password, confirmPassword)) {
-            redefinirSenha(password);
-        }
-    }
-
-    function isValidPassword(password, confirmPassword) {
-        if (!password || !confirmPassword) {
-            exibirNotificacao('Por favor, preencha todos os campos.', false);
-            return false;
-        }
-
-        if (password !== confirmPassword) {
-            exibirNotificacao('As senhas não coincidem.', false);
-            return false;
-        }
-
-        if (!passwordRegex.test(password)) {
-            exibirNotificacao('A senha deve ter pelo menos 8 caracteres, incluir letras maiúsculas e minúsculas e números.', false);
-            return false;
-        }
-
-        return true;
-    }
-
-    function redefinirSenha(password) {
-        fetch('http://localhost:8080/auth/reset-password', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ password: password })
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.codigo === 0) {
-                    exibirNotificacao('Senha redefinida com sucesso!');
-                } else {
-                    exibirNotificacao(data.mensagem || 'Erro ao redefinir a senha.', false);
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                exibirNotificacao('Erro ao redefinir a senha.', false);
-            });
-    }
-});
+})();
