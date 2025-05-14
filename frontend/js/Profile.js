@@ -27,3 +27,34 @@ function preencherPerfil(usuario) {
 document.addEventListener("DOMContentLoaded", () => {
     preencherPerfil(usuario);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("editModal");
+    const openBtn = document.getElementById("openModalBtn");
+    const closeBtn = document.querySelector(".close-btn");
+    const photoInput = document.getElementById("photo-upload");
+    const previewImg = document.getElementById("preview-img");
+
+
+    openBtn.addEventListener("click", () => {
+        modal.style.display = "block";
+    });
+
+    closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    photoInput.addEventListener("change", () => {
+        const file = photoInput.files[0];
+        if (file) {
+            previewImg.src = URL.createObjectURL(file);
+        }
+    });
+});
+
