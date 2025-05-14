@@ -1,0 +1,117 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+
+.container {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 96vh; 
+}
+.box {
+    align-content: center;
+    background-color: rgba(242, 243, 247, 0.8);
+    width: 55rem;
+    height: 35rem;
+    border-radius: 20px;
+    display: flex; 
+    padding: 2rem;  
+    position: relative;
+    justify-content: flex-start; 
+    align-items: flex-end;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.15);
+
+
+}
+.left-column{
+    width: 55rem;
+    height: 36rem;
+    padding: 0;
+}
+
+.personal-info {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column ;
+    width: 380px;
+    height: 15rem;
+    border-radius: 7px;
+    gap: 1.5rem;
+    margin-left: 0rem;
+}
+.title{
+    font-size: 1.5rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: rgb(55, 55, 55) ;
+}
+
+.subtitle{
+    color: rgb(73, 73, 73);
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 30px;
+
+}
+
+.position-img{
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+
+.img {
+  width: 380px;
+  height: 300px;
+  border-radius: 7px;
+  margin-top: 5px;
+  object-fit: cover;
+}
+
+
+.texto{
+    color: rgb(55, 55, 55) ;
+    font-size: 15px;
+    margin: 0;
+
+}
+.label {
+    font-weight: bold;
+    margin-right: 0.3rem;
+}
+
+.inline-link {
+    color: rgb(55, 55, 55) ;
+}
+
+
+.profile-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  width: 499px;
+  height: 300px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 28px;
+}
+
+.info-line {
+  display: flex;
+  justify-content: space-between;
+  width: 450px; /* ou o tamanho que quiser */
+  margin: 0.5rem 0;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.value {
+  font-family: monospace;
+}
+
+
