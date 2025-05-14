@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.achadosperdidos.backend.service.ActivationEmailService;
+import com.achadosperdidos.backend.service.AtivacaoEmailService;
 
 
 
@@ -16,11 +16,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-
+@RequestMapping("/auth")
 public class UsuarioController {
 
     @Autowired
-    private ActivationEmailService activationEmailService;
+    private AtivacaoEmailService ativacaoEmailService;
 
     private final UsuarioRepository usuarioRepository;
 
@@ -52,7 +52,7 @@ public class UsuarioController {
         // Salva o novo usuário
         usuario.setToken(UUID.randomUUID().toString());
         usuarioRepository.save(usuario);
-        activationEmailService.enviarEmailAtivacao(usuario.getEmail(), usuario.getToken());
+        ativacaoEmailService.enviarEmailAtivacao(usuario.getEmail(), usuario.getToken());
 
         resposta.put("codigo", 0);  // Código 0 para sucesso
         resposta.put("mensagem", "Usuário cadastrado com sucesso. Verifique o email para ativar sua conta!");
@@ -60,22 +60,36 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Usuario usuario) {
+    public ResponseEntity<Map<String, Object>> login(@RequestBody Usuario usuario) {
+        Map<String, Object> resposta = new HashMap<>();
+
         Optional<Usuario> usuarioOptional = usuarioRepository
                 .findByEmailAndSenha(usuario.getEmail(), usuario.getSenha());
 
         if (usuarioOptional.isPresent()) {
             Usuario usuarioEncontrado = usuarioOptional.get();
 
-            // Verifica se o usuário está ativado
             if (!usuarioEncontrado.getAtivo()) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Conta ainda não ativada.");
+                resposta.put("codigo", 1);  // Usuário não ativado
+                resposta.put("mensagem", "Conta ainda não ativada.");
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(resposta);
             }
 
-            return ResponseEntity.ok("Login bem-sucedido!");
+
+            if (usuarioEncontrado.getPerfil() == null) {
+                resposta.put("codigo", 2);  // Redireciona para criação de perfil
+                resposta.put("mensagem", "Criação de perfil necessária.");
+                return ResponseEntity.status(HttpStatus.OK).body(resposta);
+            }
+
+            resposta.put("codigo", 0);
+            resposta.put("mensagem", "Login bem-sucedido!");
+            return ResponseEntity.ok(resposta);
         }
 
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email ou senha inválidos!");
+        resposta.put("codigo", 3);
+        resposta.put("mensagem", "Email ou senha inválidos!");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resposta);
     }
 
 }

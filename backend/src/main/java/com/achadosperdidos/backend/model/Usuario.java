@@ -24,6 +24,10 @@ public class Usuario {
     @Column(unique = true)
     private String token;
 
+
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Perfil perfil;
+
     public String getToken(){
         return token;
     }
@@ -31,6 +35,7 @@ public class Usuario {
     public void setToken(String token){
         this.token = token;
     }
+
     public Boolean getAtivo() {
         return ativo;
     }
@@ -77,5 +82,17 @@ public class Usuario {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    // Métodos para o perfil
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+        if (perfil != null) {
+            perfil.setUsuario(this);  // Mantém a relação bidirecional
+        }
     }
 }
