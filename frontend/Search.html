@@ -19,10 +19,8 @@
   <div class="form-box-principal">
     <div class="post">
       <div class="post-box" id="postBox">
-        <div class="perfil-img">
-          <img src="profile.jpg" alt="Foto de Perfil">
-        </div>
-        <textarea id="inputPost" placeholder="Item perdido/encontrado.." readonly></textarea>
+        <img class="perfil-img" src="profile.jpg" alt="Foto de Perfil">
+        <textarea id="inputPost" placeholder="Publique o item aqui.." readonly></textarea>
       </div>
     </div>
 
@@ -52,8 +50,6 @@
         </div>
       </div>
     </div>
-
-
     <div id="modalPublicacao" class="modal-overlay">
       <div class="modal-content">
         <div class="form-box">
@@ -61,23 +57,16 @@
             <h2 class="titulo-central">Criar publicação</h2>
             <button id="closeModalBtn" class="close-button">✖</button>
           </div>
-
-
-
           <label for="titulo">Título:</label>
           <input type="text" id="titulo" placeholder="Digite o título do item">
-
           <label for="descricao">Descrição:</label>
           <textarea id="descricao" placeholder="Descreva o item encontrado..."></textarea>
-
-
           <div class="btn-group">
             <label for="foto" class="btn-video">
               Adicionar Mídia
               <input type="file" id="foto" accept="image/*,video/*" multiple>
             </label>
           </div>
-
           <div id="preview-container"></div>
 
           <button class="btn-publicar">Publicar</button>

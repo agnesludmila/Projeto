@@ -1,10 +1,9 @@
-document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('foto');
   const container = document.getElementById('preview-container');
   const publicarBtn = document.querySelector('.btn-publicar');
   const modal = document.getElementById('modal');
   const closeModalBtn = document.querySelector('.close-modal');
-
 
   input.addEventListener('change', () => {
     container.innerHTML = '';
@@ -12,11 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const reader = new FileReader();
       const item = document.createElement('div');
       item.classList.add('preview-item');
-
       const deleteBtn = document.createElement('button');
       deleteBtn.classList.add('delete-btn');
       deleteBtn.innerText = '×';
-
       deleteBtn.addEventListener('click', () => {
         item.remove();
       });
@@ -32,15 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
           video.controls = true;
           item.appendChild(video);
         }
-
         item.appendChild(deleteBtn);
         container.appendChild(item);
       };
-
       reader.readAsDataURL(file);
     });
   });
-
 
   publicarBtn.addEventListener('click', function (e) {
     e.preventDefault();
