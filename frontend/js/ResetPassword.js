@@ -1,4 +1,4 @@
-import { exibirNotificacao } from './notificacao';
+import { exibirNotificacao } from './notificacao.js';
 
 (async () => {
     const params = new URLSearchParams(window.location.search);

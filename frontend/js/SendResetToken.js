@@ -1,4 +1,4 @@
-import { exibirNotificacao } from './notificacao';
+import { exibirNotificacao } from './notificacao.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const resetButton = document.querySelector('.form-tela2 .form-button');

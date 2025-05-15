@@ -24,6 +24,7 @@ public class Usuario {
     @Column(unique = true)
     private String token;
 
+    private String telefone = "";
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Perfil perfil;
@@ -34,6 +35,14 @@ public class Usuario {
 
     public void setToken(String token){
         this.token = token;
+    }
+
+    public String getTelefone(){
+        return telefone;
+    }
+
+    public void setTelefone(String telefone){
+        this.telefone = telefone;
     }
 
     public Boolean getAtivo() {

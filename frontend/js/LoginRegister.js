@@ -1,5 +1,5 @@
 'use strict';
-import { exibirNotificacao } from './notificacao';
+import { exibirNotificacao } from './notificacao.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     const loginContainer = document.getElementById('login-container');
@@ -92,20 +92,24 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
                 const response = await fetch('http://localhost:8080/auth/login', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(credenciais),
                 });
 
-                const mensagem = await response.text();
-                if (response.ok && mensagem === "Login bem-sucedido!") {
-                    exibirNotificacao(mensagem);
+                const resposta = await response.json();
+
+                if (resposta.codigo === 0) {
+                    localStorage.setItem("usuarioId", resposta.id);
+                    exibirNotificacao(resposta.mensagem || "Login bem-sucedido!");
                     setTimeout(() => window.location.href = "/MAP/frontend/Main.html", 2000);
-                } else if (response.status === 401) {
-                    exibirNotificacao(mensagem || "Email ou senha inválidos!", false);
-                } else if (response.status === 403) {
-                    exibirNotificacao(mensagem || "Por favor, ative a sua conta primeiro!", false);
+                } else if (resposta.codigo === 1) {
+                    exibirNotificacao("Por favor, ative a sua conta primeiro!", false);
+                } else if (resposta.codigo === 2) {
+                    localStorage.setItem("usuarioId", resposta.id);
+                    exibirNotificacao("Criação de perfil necessária.");
+                    setTimeout(() => window.location.href = "/MAP/frontend/Profile.html", 2000);
                 } else {
-                    exibirNotificacao(mensagem || "Erro ao autenticar.", false);
+                    exibirNotificacao(resposta.mensagem || "Email ou senha inválidos!", false);
                 }
             } catch (error) {
                 console.error('Erro ao autenticar:', error);
@@ -115,4 +119,5 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-});
+})
+
