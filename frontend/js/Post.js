@@ -94,13 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-const toggleBtn = document.getElementById('searchToggle');
-const wrapper = document.querySelector('.search-wrapper');
-
-toggleBtn.addEventListener('click', () => {
-  wrapper.classList.toggle('active');
-});
-
 
 document.getElementById("inputPost").addEventListener("click", function () {
   document.getElementById("modalPublicacao").style.display = "flex";
