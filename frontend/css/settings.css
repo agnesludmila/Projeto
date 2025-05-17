@@ -1,92 +1,148 @@
-body {
-    font-family: 'Istok Web', sans-serif;
-    background-color: white;
-    margin: 0;
-    padding: 20px;
-  }
-  
-  .config-container {
-    max-width: 1000px;
-    margin: auto;
-    background-color: #eee;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    display: flex;
-    gap: 30px;
-  }
-  
-  
-  .profile {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .profile-pic {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-  }
-  
-  h2 {
-    margin: 0;
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .menu-item {
-    margin-bottom: 10px;
-  }
-  
-  .menu-item button {
-    width: 100%;
-    background-color: #f1f1f1;
-    border: none;
-    border-radius: 10px;
-    padding: 12px;
-    font-size: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #333;
-    cursor: pointer;
-    transition: background 0.3s;
-    position: relative;
-  }
-  
-  .menu-item button:hover {
-    background-color: #d0d0f5;
-  }
-  
-  .menu-item .arrow {
-    text-decoration: none;
-    font-size: 18px;
-    color: #666;
-    margin-left: 10px;
-  }
-  
-  .arrow:hover {
-    color: #000;
-  }
-  
-  .config-boxes {
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-  }
-  
-  .box {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 12px;
-  }
-  
-  .box h3 {
-    margin-top: 0;
-    font-size: 18px;
-    color: #555;
-  }
-  
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Istok Web', sans-serif;
+  background-color: #f0f0f0;
+}
+
+
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+}
+
+.sidebar {
+  width: 350px; 
+  background-color: #b32b26;
+  color: white;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  justify-content: flex-start;
+}
+
+.sidebar .perfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%; 
+}
+
+.sidebar .foto-perfil {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.sidebar .nome,
+.sidebar .email {
+  margin-left: 0; 
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar nav ul li {
+  margin: 25px 0;
+}
+
+.sidebar nav ul li a {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background 0.3s;
+  font-size: 1.1rem;
+  gap: 15px; 
+}
+
+.sidebar nav ul li a svg {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  fill: white;
+}
+
+.sidebar nav ul li a:hover {
+  background-color: #99231f;
+}
+
+
+.conteudo {
+  flex: 1;
+  padding: 40px;
+  background-color: #f7f7f7;
+  overflow-y: auto;
+}
+
+.conteudo h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.card h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card ul li {
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+}
+
+.card ul li:first-child {
+  border-top: none;
+}
+
+.card ul li a {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.card ul li a:hover {
+  color: #b32b26;
+}
+
+.card ul li span {
+  font-size: 18px;
+}
+h2{
+  color:#b32b26;
+}

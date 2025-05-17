@@ -1,91 +1,153 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Página Inicial</title>
-  <link rel="stylesheet" href="css/main-page.css">
-  <script src="./js/Post.js"defer></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Página inicial</title>
+  <link rel="stylesheet" href="./css/main-page.css" />
+  <script src="./js/Post.js" defer></script>
 </head>
+
 <body>
-<div class="container">
-  <header>
-    <div class="search-wrapper">
-      <button id="searchToggle" class="search-icon">🔍</button>
-      <input typ="text" id="searchInput" class="search-input" placeholder="Buscar...">
-    </div>
-  </header>
-  <div class="form-box-principal">
-    <div class="post">
-      <div class="post-box" id="postBox">
-        <div class="perfil-img">
-          <img src="profile.jpg" alt="Foto de Perfil">
-        </div>
-        <textarea id="inputPost" placeholder="Item perdido/encontrado.." readonly></textarea>
-      </div>
-    </div>
+  <div class="container">
+    <aside class="sidebar">
+      <ul class="menu-lateral">
+        <li class="usuario">
+          <img src="profile.jpg" alt="Foto de Perfil" class="perfil-img" />
+          <span class="nome-usuario">Nome do usuário</span>
+          <div class="usuario-email">nomedousuario@gmail.com</div>
+        </li>
+        <li>
+          <a href="#" class="menu-link">
+            <svg width="20" height="20" fill="black" viewBox="0 0 24 24">
+              <path
+                d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+            </svg>
+            Perfil
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-link">
+            <svg width="20" height="20" fill="black" viewBox="0 0 24 24">
+              <path d="M12 3l9 9h-3v9h-4v-6h-4v6H6v-9H3z" />
+            </svg>
+            Início
+          </a>
+        </li>
+        <li>
+          <a href="./Settings.html" class="menu-link">
+            <svg width="20" height="20" fill="black" viewBox="0 0 24 24">
+              <path
+                d="M19.14,12.94a7.77,7.77,0,0,0,.06-1,7.77,7.77,0,0,0-.06-1l2.11-1.65a.5.5,0,0,0,.11-.65l-2-3.46a.5.5,0,0,0-.61-.22l-2.49,1a7.6,7.6,0,0,0-1.73-1L14.5,2.5a.5.5,0,0,0-.5-.5H10a.5.5,0,0,0-.5.5L9.6,5.9a7.6,7.6,0,0,0-1.73,1l-2.49-1a.5.5,0,0,0-.61.22l-2,3.46a.5.5,0,0,0,.11.65L4.86,10.9a7.77,7.77,0,0,0,0,2.1L2.75,14.65a.5.5,0,0,0-.11.65l2,3.46a.5.5,0,0,0,.61.22l2.49-1a7.6,7.6,0,0,0,1.73,1l.9,3.4a.5.5,0,0,0,.5.5h4a.5.5,0,0,0,.5-.5l.9-3.4a7.6,7.6,0,0,0,1.73-1l2.49,1a.5.5,0,0,0,.61-.22l2-3.46a.5.5,0,0,0-.11-.65Zm-7.14,2.56A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+            </svg>
+            Configurações
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-link">
+            <svg width="20" height="20" fill="black" viewBox="0 0 24 24">
+              <path d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3h-8v2h8v14h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+            </svg>
+            Sair
+          </a>
+        </li>
+      </ul>
+    </aside>
 
-    <h2>Itens recentes</h2>
 
-    <div class="gallery-grid">
-      <div class="item-card" onclick="abrirVisualizacao('img/img1.jpg', 'Fones de ouvido', 'Encontrado na biblioteca.', 'Ana Souza')">
-        <img src="img/img1.jpg" alt="Item publicado">
-      </div>
-      <div class="item-card" onclick="abrirVisualizacao('img/img2.jpg', 'Cartão de estudante', 'Achado próximo ao RU.', 'Lucas Ribeiro')">
-        <img src="img/img2.jpg" alt="Item publicado">
-      </div>
-    </div>
-
-    <div id="visualizacaoModal" class="visualizacao-modal">
-      <div class="visualizacao-content">
-        <span class="close" onclick="fecharVisualizacao()">&times;</span>
-        <div class="usuario-info">
-          <p class="usuario-nome" id="visualizacao-usuario"></p>
-        </div>
-        <h3 id="visualizacao-titulo"></h3>
-
-        <p id="visualizacao-descricao"></p>
-
-        <div class="item-foto">
-          <img id="visualizacao-img" src="" alt="Imagem do item">
-        </div>
-      </div>
-    </div>
-
-
-    <div id="modalPublicacao" class="modal-overlay">
-      <div class="modal-content">
-        <div class="form-box">
-          <div class="modal-header">
-            <h2 class="titulo-central">Criar publicação</h2>
-            <button id="closeModalBtn" class="close-button">✖</button>
+    <main class="main">
+      <header>
+        <div class="top-content">
+          <div class="search-wrapper" id="searchWrapper">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar..." />
+            <button id="searchToggle" class="search-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#000" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-search" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
           </div>
 
+          <div class="form-box-principal">
+            <div class="post">
+              <div class="post-box" id="postBox">
+                <img src="profile.jpg" alt="Foto de Perfil" class="perfil-img" />
+                <textarea id="inputPost" placeholder="Item perdido/encontrado.." readonly></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
-          <label for="titulo">Título:</label>
-          <input type="text" id="titulo" placeholder="Digite o título do item">
+        <h2>Itens recentes</h2>
+        <br>
+        <br>
+        <div class="gallery-grid">
+          <div class="item-card"
+            onclick="abrirVisualizacao('img/img1.jpg', 'Fones de ouvido', 'Encontrado na biblioteca.', 'Ana Souza')">
+            <img src="img/img1.jpg" alt="Item publicado" />
+            <div class="item-info">
 
-          <label for="descricao">Descrição:</label>
-          <textarea id="descricao" placeholder="Descreva o item encontrado..."></textarea>
-
-
-          <div class="btn-group">
-            <label for="foto" class="btn-video">
-              Adicionar Mídia
-              <input type="file" id="foto" accept="image/*,video/*" multiple>
-            </label>
+            </div>
           </div>
 
-          <div id="preview-container"></div>
+          <div class="item-card"
+            onclick="abrirVisualizacao('img/img2.jpg', 'Cartão de estudante', 'Achado próximo ao RU.', 'Lucas Ribeiro')">
+            <img src="img/img2.jpg" alt="Item publicado" />
+            <div class="item-info">
 
-          <button class="btn-publicar">Publicar</button>
-
+            </div>
+          </div>
         </div>
+  </div>
+  </main>
+  </div>
+  <div id="visualizacaoModal" class="visualizacao-modal">
+    <div class="visualizacao-content">
+      <span class="close" onclick="fecharVisualizacao()">&times;</span>
+      <div class="usuario-info">
+        <p class="usuario-nome" id="visualizacao-usuario"></p>
+      </div>
+      <h3 id="visualizacao-titulo"></h3>
+
+      <p id="visualizacao-descricao"></p>
+
+      <div class="item-foto">
+        <img id="visualizacao-img" src="" alt="Imagem do item" />
       </div>
     </div>
   </div>
-</div>
+  <div id="modalPublicacao" class="modal-overlay">
+    <div class="modal-content">
+      <div class="form-box">
+        <div class="modal-header">
+          <h2 class="titulo-central">Criar publicação</h2>
+          <button id="closeModalBtn" class="close-button">✖</button>
+        </div>
+
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" placeholder="Digite o título do item" />
+
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" placeholder="Descreva o item encontrado..."></textarea>
+
+        <div class="btn-group">
+          <label for="foto" class="btn-video">
+            Adicionar Mídia
+            <input type="file" id="foto" accept="image/*,video/*" multiple />
+          </label>
+        </div>
+
+        <div id="preview-container"></div>
+
+        <button class="btn-publicar">Publicar</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="./js/Post.js" defer></script>
 </body>
+
 </html>

@@ -1,91 +1,95 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Configurações</title>
+  <script src="https://kit.fontawesome.com/3ddcccdcb6.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Istok+Web:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/settings.css" />
 </head>
-<body class="config-page">
-  <section class="config-container">
-    <div class="profile">
-        <img src="perfil.jpg" alt="Foto de perfil" class="profile-pic" />
-        <h2>Configurações</h2>
-      
-        <div class="menu">
-          <div class="menu-item">
-            <button>
-              👤 Conta
-              <a href="conta.html" class="arrow"></a>
-            </button>
-          </div>
-          <div class="menu-item">
-            <button>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 24 24">
-                    <path d="M12 17a1.5 1.5 0 001.5-1.5h-3A1.5 1.5 0 0012 17zm6-6h-1V9a5 5 0 00-10 0v2H6a1 1 0 00-1 1v9a1 1 0 001 1h12a1 1 0 001-1v-9a1 1 0 00-1-1zm-8-2a4 4 0 018 0v2h-8V9z"/>
-                  </svg>
-                   Acesso e segurança
-              <a href="seguranca.html" class="arrow"></a>
-            </button>
-          </div>
-          <div class="menu-item">
-            <button>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 24 24">
-                    <path d="M12 2a7 7 0 00-7 7v4.586l-.707.707A1 1 0 005 16h14a1 1 0 00.707-1.707L19 13.586V9a7 7 0 00-7-7zm0 20a2 2 0 002-2H10a2 2 0 002 2z"/>
-                  </svg>
-                   Notificações
-              <a href="notificacoes.html" class="arrow"></a>
-            </button>
-          </div>
-        </div>
-      </div>
 
-    <div class="config-boxes">
-      <div class="box">
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="perfil">
+        <img src="perfil.jpg" alt="Foto de Perfil" class="foto-perfil" />
+        <p class="nome">Nome do usuário</p>
+        <p class="email">nomedousuario@gmail.com</p>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="#">
+              <svg width="28" height="28" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+              Início
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none" />
+                <line x1="12" y1="8" x2="12" y2="14" stroke="white" stroke-width="2" stroke-linecap="round" />
+                <circle cx="12" cy="17" r="1" fill="white" />
+              </svg>
+              Sobre
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg width="28" height="28" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M19.14 12.94a7.07 7.07 0 0 0 .05-1 7.07 7.07 0 0 0-.05-1l2.11-1.65a.5.5 0 0 0 .12-.63l-2-3.46a.5.5 0 0 0-.6-.22l-2.49 1a7.11 7.11 0 0 0-1.7-1L14.4 4.33a.5.5 0 0 0-.5-.33H10.1a.5.5 0 0 0-.5.33L9 6.55a7.11 7.11 0 0 0-1.7 1l-2.49-1a.5.5 0 0 0-.6.22l-2 3.46a.5.5 0 0 0 .12.63L4.86 10a7.07 7.07 0 0 0-.05 1 7.07 7.07 0 0 0 .05 1L2.75 14.65a.5.5 0 0 0-.12.63l2 3.46a.5.5 0 0 0 .6.22l2.49-1a7.11 7.11 0 0 0 1.7 1l.6 2.22a.5.5 0 0 0 .5.33h3.8a.5.5 0 0 0 .5-.33l.6-2.22a7.11 7.11 0 0 0 1.7-1l2.49 1a.5.5 0 0 0 .6-.22l2-3.46a.5.5 0 0 0-.12-.63zM12 14.94a3 3 0 1 1 3-3 3 3 0 0 1-3 3z" />
+              </svg>
+              Serviços
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg width="28" height="28" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M6.62 10.79a15.09 15.09 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21 11.36 11.36 0 0 0 3.55.57 1 1 0 0 1 1 1v3.59a1 1 0 0 1-1 1A16 16 0 0 1 4 6a1 1 0 0 1 1-1h3.6a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.55 1 1 0 0 1-.21 1.11z" />
+              </svg>
+              Contato
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </aside>
+
+    <main class="conteudo">
+      <h2>Configurações</h2>
+
+      <section class="card">
         <h3>Informações do perfil</h3>
-        <div class="menu-item">
-          <span>Nome, e-mail e número celular</span>
-          <a href="dados.html" class="arrow">→</a>
-        </div>
-        <div class="menu-item">
-          <span>Matrícula</span>
-          <a href="matricula.html" class="arrow">→</a>
-        </div>
-        <div class="menu-item">
-          <span>Verificações</span>
-          <a href="verificacoes.html" class="arrow">→</a>
-        </div>
-      </div>
+        <ul>
+          <li><a href="#">Nome, e-mail e celular <span>&rarr;</span></a></li>
+          <li><a href="#">Matrícula <span>&rarr;</span></a></li>
+          <li><a href="#">Verificações <span>&rarr;</span></a></li>
+        </ul>
+      </section>
 
-      <div class="box">
+      <section class="card">
         <h3>Preferências gerais</h3>
-        <div class="menu-item">
-          <span>Idioma</span>
-          <a href="idioma.html" class="arrow">→</a>
-        </div>
-        <div class="menu-item">
-          <span>Exibir fotos de perfil</span>
-          <a href="fotos-perfil.html" class="arrow">→</a>
-        </div>
-        <div class="menu-item">
-          <span>Efeitos sonoros</span>
-          <a href="efeitos.html" class="arrow">→</a>
-        </div>
-      </div>
+        <ul>
+          <li><a href="#">Idioma <span>&rarr;</span></a></li>
+          <li><a href="#">Exibir fotos de perfil <span>&rarr;</span></a></li>
+          <li><a href="#">Efeitos sonoros <span>&rarr;</span></a></li>
+        </ul>
+      </section>
 
-      <div class="box">
+      <section class="card">
         <h3>Gerenciamento de conta</h3>
-        <div class="menu-item">
-          <span>Colocar conta em hibernação</span>
-          <a href="hibernar.html" class="arrow">→</a>
-        </div>
-        <div class="menu-item">
-          <span>Encerrar conta</span>
-          <a href="encerrar.html" class="arrow">→</a>
-        </div>
-      </div>
-    </div>
-  </section>
+        <ul>
+          <li><a href="#">Colocar conta em hibernação <span>&rarr;</span></a></li>
+          <li><a href="#">Encerrar conta <span>&rarr;</span></a></li>
+        </ul>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
