@@ -10,6 +10,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
   <div class="container">
     <aside class="sidebar">
       <ul class="menu-lateral">
@@ -97,6 +98,69 @@
             onclick="abrirVisualizacao('img/img2.jpg', 'Cartão de estudante', 'Achado próximo ao RU.', 'Lucas Ribeiro')">
             <img src="img/img2.jpg" alt="Item publicado" />
             <div class="item-info">
+=======
+<div class="container">
+  <header>
+    <div class="search-wrapper">
+      <button id="searchToggle" class="search-icon">🔍</button>
+      <input typ="text" id="searchInput" class="search-input" placeholder="Buscar...">
+    </div>
+  </header>
+  <div class="form-box-principal">
+    <div class="post">
+      <div class="post-box" id="postBox">
+        <img class="perfil-img" src="profile.jpg" alt="Foto de Perfil">
+        <textarea id="inputPost" placeholder="Publique o item aqui.." readonly></textarea>
+      </div>
+    </div>
+
+    <h2>Itens recentes</h2>
+
+    <div class="gallery-grid">
+      <div class="item-card" onclick="abrirVisualizacao('img/img1.jpg', 'Fones de ouvido', 'Encontrado na biblioteca.', 'Ana Souza')">
+        <img src="img/img1.jpg" alt="Item publicado">
+      </div>
+      <div class="item-card" onclick="abrirVisualizacao('img/img2.jpg', 'Cartão de estudante', 'Achado próximo ao RU.', 'Lucas Ribeiro')">
+        <img src="img/img2.jpg" alt="Item publicado">
+      </div>
+    </div>
+
+    <div id="visualizacaoModal" class="visualizacao-modal">
+      <div class="visualizacao-content">
+        <span class="close" onclick="fecharVisualizacao()">&times;</span>
+        <div class="usuario-info">
+          <p class="usuario-nome" id="visualizacao-usuario"></p>
+        </div>
+        <h3 id="visualizacao-titulo"></h3>
+
+        <p id="visualizacao-descricao"></p>
+
+        <div class="item-foto">
+          <img id="visualizacao-img" src="" alt="Imagem do item">
+        </div>
+      </div>
+    </div>
+    <div id="modalPublicacao" class="modal-overlay">
+      <div class="modal-content">
+        <div class="form-box">
+          <div class="modal-header">
+            <h2 class="titulo-central">Criar publicação</h2>
+            <button id="closeModalBtn" class="close-button">✖</button>
+          </div>
+          <label for="titulo">Título:</label>
+          <input type="text" id="titulo" placeholder="Digite o título do item">
+          <label for="descricao">Descrição:</label>
+          <textarea id="descricao" placeholder="Descreva o item encontrado..."></textarea>
+          <div class="btn-group">
+            <label for="foto" class="btn-video">
+              Adicionar Mídia
+              <input type="file" id="foto" accept="image/*,video/*" multiple>
+            </label>
+          </div>
+          <div id="preview-container"></div>
+
+          <button class="btn-publicar">Publicar</button>
+>>>>>>> 6828c7e39617a608463bb54149d4f6a824e62720
 
             </div>
           </div>

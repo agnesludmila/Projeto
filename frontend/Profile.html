@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Perfil</title>
+    <link rel="stylesheet" href="./css/profile.css" />
+</head>
+<body>
+<div class="container">
+    <div class="box">
+        <div class="left-column">
+            <div class="position-img" style="position: relative;">
+                <img
+                        class="img"
+                        id="preview-img"
+                        src="./imgprofile/ImagemProfile.jpg"
+                        alt="Foto de perfil"
+                />
+                <button
+                        id="openModalBtn"
+                        class="button-edit"
+                        title="Editar foto"
+                        style="position: absolute; bottom: 10px; right: 10px;"
+                >
+                    ✎
+                </button>
+            </div>
+            <div class="personal-info">
+                <h2 id="nomeCompleto" class="title">Nome Completo</h2>
+                <h4 id="biografia" class="subtitle">Biografia</h4>
+                <p class="texto">
+                    <span class="label">Email:</span>
+                    <a id="emailLink" class="inline-link" href="#">email@example.com</a>
+                </p>
+                <p class="texto">
+                    <span class="label">Telefone:</span>
+                    <a id="telefoneLink" class="inline-link" href="#">(00) 00000-0000</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="profile-right">
+            <h3 class="title">Atividades</h3>
+            <p class="info-line">
+                <span class="label">Posts:</span>
+                <span id="post-count" class="value">---</span>
+            </p>
+            <p class="info-line">
+                <span class="label">Comentários:</span>
+                <span id="comment-count" class="value">---</span>
+            </p>
+        </div>
+
+        <!-- Modal de Edição de Perfil -->
+        <div id="editModal" class="modal" style="display: none;">
+            <div class="modal-content profile-modal">
+                <button
+                        class="close-btn"
+                        aria-label="Fechar modal"
+                        onclick="document.getElementById('editModal').style.display='none'"
+                >
+                    &times;
+                </button>
+                <h2 class="modal-title">Editar Perfil</h2>
+
+                <div class="profile-pic-container rounded" style="position: relative;">
+                    <img
+                            src="./imgprofile/ImagemProfile.jpg"
+                            alt="Foto de perfil"
+                            class="profile-pic"
+                            id="preview-img-modal"
+                            style="width: 120px; height: 120px; object-fit: cover; border-radius: 50%;"
+                    />
+                    <label
+                            for="photo-upload"
+                            class="edit-photo-btn"
+                            title="Alterar foto"
+                            style="position: absolute; bottom: 0; right: 0; cursor: pointer;"
+                    >
+                        ✎
+                    </label>
+                    <input type="file" id="photo-upload" accept="image/*" style="display: none" />
+                </div>
+
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" placeholder="Nome" />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="email@aluno.uepb.edu.br" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="biografiaid">Bio</label>
+                    <input
+                            type="text"
+                            id="biografiaid"
+                            placeholder="O que deseja colocar na sua bio.."
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" id="telefone" placeholder="+55 00 00000-0000" />
+                </div>
+
+                <button class="save-btn">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="./js/Profile.js"></script>
+</body>
+</html>

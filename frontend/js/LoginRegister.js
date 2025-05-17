@@ -1,4 +1,5 @@
 'use strict';
+import { exibirNotificacao } from './notificacao.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     const loginContainer = document.getElementById('login-container');
@@ -7,42 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById('cadastrar')?.addEventListener('click', moveOverlay);
     document.getElementById('entrar')?.addEventListener('click', moveOverlay);
-
-    function exibirNotificacao(mensagem, sucesso = true, tempo = 3000) {
-        // Remove notificações anteriores antes de exibir uma nova
-        const notificacaoAnterior = document.querySelector('.toast-notificacao');
-        if (notificacaoAnterior) {
-            notificacaoAnterior.remove();
-        }
-
-        const toast = document.createElement('div');
-        toast.classList.add('toast-notificacao');
-        toast.innerHTML = sucesso ? `✅ ${mensagem}` : `✖️ ${mensagem}`;
-
-        Object.assign(toast.style, {
-            position: 'fixed',
-            bottom: '30px',
-            right: '30px',
-            padding: '15px 25px',
-            borderRadius: '8px',
-            backgroundColor: sucesso ? '#4CAF50' : '#f44336',
-            color: 'white',
-            fontSize: '16px',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
-            zIndex: '1000',
-            opacity: '0',
-            transition: 'opacity 0.5s'
-        });
-
-        document.body.appendChild(toast);
-
-        setTimeout(() => { toast.style.opacity = '1'; }, 100);
-
-        setTimeout(() => {
-            toast.style.opacity = '0';
-            setTimeout(() => toast.remove(), 500);
-        }, tempo);
-    }
 
     const cadastroForm = document.getElementById('cadastroForm');
     if (cadastroForm) {
@@ -72,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             exibirNotificacao("Cadastrando usuário...");
             try {
-                const response = await fetch('http://localhost:8080/cadastro', {
+                const response = await fetch('http://localhost:8080/auth/cadastro', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(usuario),
@@ -125,22 +90,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
             exibirNotificacao("Autenticando...");
             try {
-                const response = await fetch('http://localhost:8080/login', {
+                const response = await fetch('http://localhost:8080/auth/login', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(credenciais),
                 });
 
-                const mensagem = await response.text();
-                if (response.ok && mensagem === "Login bem-sucedido!") {
-                    exibirNotificacao(mensagem);
+                const resposta = await response.json();
+
+                if (resposta.codigo === 0) {
+                    localStorage.setItem("usuarioId", resposta.id);
+                    exibirNotificacao(resposta.mensagem || "Login bem-sucedido!");
                     setTimeout(() => window.location.href = "/MAP/frontend/Main.html", 2000);
-                } else if (response.status === 401) {
-                    exibirNotificacao(mensagem || "Email ou senha inválidos!", false);
-                } else if (response.status === 403) {
-                    exibirNotificacao(mensagem || "Por favor, ative a sua conta primeiro!", false);
+                } else if (resposta.codigo === 1) {
+                    exibirNotificacao("Por favor, ative a sua conta primeiro!", false);
+                } else if (resposta.codigo === 2) {
+                    localStorage.setItem("usuarioId", resposta.id);
+                    exibirNotificacao("Criação de perfil necessária.");
+                    setTimeout(() => window.location.href = "/MAP/frontend/Profile.html", 2000);
                 } else {
-                    exibirNotificacao(mensagem || "Erro ao autenticar.", false);
+                    exibirNotificacao(resposta.mensagem || "Email ou senha inválidos!", false);
                 }
             } catch (error) {
                 console.error('Erro ao autenticar:', error);
@@ -150,4 +119,5 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-});
+})
+

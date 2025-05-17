@@ -8,7 +8,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ActivationEmailService {
+public class AtivacaoEmailService {
 
     @Autowired
     private JavaMailSender mailSender;
