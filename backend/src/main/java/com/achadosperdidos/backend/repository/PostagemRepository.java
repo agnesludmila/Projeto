@@ -7,4 +7,7 @@ import com.achadosperdidos.backend.model.Postagem;
 
 public interface PostagemRepository extends JpaRepository<Postagem, Long> {
     List<Postagem> findByDataCriacaoBefore(LocalDateTime limite);
+    List<Postagem> findByUsuarioIdOrderByDataCriacaoDesc(Long usuarioId);
+    List<Postagem> findAllByOrderByDataCriacaoDesc();
+    List<Postagem> findByUsuarioId(Long usuarioId);
 }

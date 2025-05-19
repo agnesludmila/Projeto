@@ -115,7 +115,8 @@ public class PerfilController {
         }
 
         try {
-            Path uploadPath = Paths.get(uploadDir);
+            String basePath = System.getProperty("user.dir");
+            Path uploadPath = Paths.get(basePath, uploadDir);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
@@ -147,4 +148,5 @@ public class PerfilController {
                     .body("Falha ao salvar arquivo: " + e.getMessage());
         }
     }
+
 }

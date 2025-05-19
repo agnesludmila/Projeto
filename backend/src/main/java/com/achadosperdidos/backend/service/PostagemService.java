@@ -40,7 +40,7 @@ public class PostagemService {
             postagem.setDescricao(descricao);
             postagem.setCaminhoImagem(caminho.toString());
             postagem.setDataCriacao(LocalDateTime.now());
-            postagem.setAutor(autor);
+            postagem.setUsuario(autor);
 
             postagemRepository.save(postagem);
         }

@@ -1,8 +1,10 @@
 package com.achadosperdidos.backend.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 public class Postagem {
@@ -13,12 +15,20 @@ public class Postagem {
 
     private String titulo;
 
-    private String descricao;
-    private String caminhoImagem;
-    private LocalDateTime dataCriacao;
+    @Column(columnDefinition = "TEXT")
+    private String descricao;  // <--- campo adicionado
 
-    @ManyToOne
-    private Usuario autor;
+    private String caminhoImagem;
+
+    private LocalDateTime dataCriacao = LocalDateTime.now();
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "usuario_id")
+    @JsonIgnoreProperties({"senha", "token", "postagens", "perfil"})
+    private Usuario usuario;
+
+
+    // Getters e Setters
 
     public Long getId() {
         return id;
@@ -60,8 +70,11 @@ public class Postagem {
         this.dataCriacao = dataCriacao;
     }
 
-    public void setAutor(Usuario autor) {
-        this.autor = autor;  // Método setAutor
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
-

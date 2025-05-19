@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (resposta.codigo === 0) {
                     localStorage.setItem("usuarioId", resposta.id);
                     exibirNotificacao(resposta.mensagem || "Login bem-sucedido!");
-                    setTimeout(() => window.location.href = "/MAP/frontend/Main.html", 2000);
+                    setTimeout(() => window.location.href = "/MAP/frontend/Search.html", 2000);
                 } else if (resposta.codigo === 1) {
                     exibirNotificacao("Por favor, ative a sua conta primeiro!", false);
                 } else if (resposta.codigo === 2) {
