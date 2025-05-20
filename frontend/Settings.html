@@ -12,67 +12,55 @@
 
 <body>
 <div class="container">
-  <aside class="sidebar">
-    <div class="perfil">
-      <img src="perfil.jpg" alt="Foto de Perfil" class="perfil-img" />
-      <p class="nome-usuario">Nome do usuário</p>
-      <p class="usuario-email">nomedousuario@gmail.com</p>
-    </div>
-    <nav>
-      <ul>
+  <div class="top-header">
+    <div class="logo">ACHADOS <span>E PERDIDOS</span></div>
+  </div>
+  <div class="container">
+    <aside class="sidebar">
+      <ul class="menu-lateral">
+        <div class="header-sidebar">
+          <li class="usuario">
+            <img src="" alt="Foto de Perfil" class="perfil-img-sidebar" />
+            <span class="nome-usuario">Nome do usuário</span>
+            <div class="usuario-email">nomedousuario@gmail.com</div>
+          </li>
+        </div>
         <li>
-          <a href="Search.html">
-            <svg width="28" height="28" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          <a href="./Profile.html" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+              <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.315 0-10 1.673-10 5v3h20v-3c0-3.327-6.685-5-10-5z"/>
+            </svg>
+            Perfil
+          </a>
+        </li>
+        <li>
+          <a href="Search.html" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+              <path d="M12 3l9 9-1.5 1.5L18 12.5V20H6v-7.5l-1.5 1.5L3 12l9-9z"/>
             </svg>
             Início
           </a>
         </li>
         <li>
-          <a href="#">
-            <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none" />
-              <line x1="12" y1="8" x2="12" y2="14" stroke="white" stroke-width="2" stroke-linecap="round" />
-              <circle cx="12" cy="17" r="1" fill="white" />
+          <a href="./Settings.html" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+              <path d="M19.14 12.936c.036-.306.06-.618.06-.936s-.024-.63-.07-.936l2.037-1.593a.486.486 0 0 0 .116-.612l-1.928-3.338a.487.487 0 0 0-.593-.214l-2.4.96a7.007 7.007 0 0 0-1.623-.936l-.36-2.52A.488.488 0 0 0 14 2h-4a.488.488 0 0 0-.483.405l-.36 2.52c-.6.252-1.146.57-1.623.936l-2.4-.96a.487.487 0 0 0-.593.214L2.717 8.496a.486.486 0 0 0 .116.612l2.037 1.593c-.045.3-.07.612-.07.936s.024.63.07.936L2.833 14.56a.486.486 0 0 0-.116.612l1.928 3.338c.126.222.393.312.593.214l2.4-.96c.477.366 1.023.684 1.623.936l.36 2.52A.488.488 0 0 0 10 22h4c.24 0 .45-.168.483-.405l.36-2.52c.6-.252 1.146-.57 1.623-.936l2.4.96a.487.487 0 0 0 .593-.214l1.928-3.338a.486.486 0 0 0-.116-.612l-2.037-1.593zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/>
             </svg>
-            Sobre
+            Configurações
           </a>
         </li>
         <li>
-          <a href="#">
-            <svg width="28" height="28" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path
-                      d="M19.14 12.94a7.07 7.07 0 0 0 .05-1 7.07 7.07 0 0 0-.05-1l2.11-1.65a.5.5 0 0 0 .12-.63l-2-3.46a.5.5 0 0 0-.6-.22l-2.49 1a7.11 7.11 0 0 0-1.7-1L14.4 4.33a.5.5 0 0 0-.5-.33H10.1a.5.5 0 0 0-.5.33L9 6.55a7.11 7.11 0 0 0-1.7 1l-2.49-1a.5.5 0 0 0-.6.22l-2 3.46a.5.5 0 0 0 .12.63L4.86 10a7.07 7.07 0 0 0-.05 1 7.07 7.07 0 0 0 .05 1L2.75 14.65a.5.5 0 0 0-.12.63l2 3.46a.5.5 0 0 0 .6.22l2.49-1a7.11 7.11 0 0 0 1.7 1l.6 2.22a.5.5 0 0 0 .5.33h3.8a.5.5 0 0 0 .5-.33l.6-2.22a7.11 7.11 0 0 0 1.7-1l2.49 1a.5.5 0 0 0 .6-.22l2-3.46a.5.5 0 0 0-.12-.63zM12 14.94a3 3 0 1 1 3-3 3 3 0 0 1-3 3z" />
+          <a href="./LoginRegister.html" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+              <path d="M16 13v-2H7V8l-5 4 5 4v-3h9zm3-10H5c-1.1 0-2 .9-2 2v6h2V5h14v14H5v-6H3v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
             </svg>
-            Serviços
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <svg width="28" height="28" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path
-                      d="M6.62 10.79a15.09 15.09 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21 11.36 11.36 0 0 0 3.55.57 1 1 0 0 1 1 1v3.59a1 1 0 0 1-1 1A16 16 0 0 1 4 6a1 1 0 0 1 1-1h3.6a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.55 1 1 0 0 1-.21 1.11z" />
-            </svg>
-            Contato
+            Sair
           </a>
         </li>
       </ul>
-    </nav>
-
-  </aside>
+    </aside>
 
   <main class="conteudo">
-    <h2>Configurações</h2>
-
-    <section class="card">
-      <h3>Informações do perfil</h3>
-      <ul>
-        <li><a href="#">Nome, e-mail e celular <span>&rarr;</span></a></li>
-        <li><a href="#">Matrícula <span>&rarr;</span></a></li>
-        <li><a href="#">Verificações <span>&rarr;</span></a></li>
-      </ul>
-    </section>
-
     <section class="card">
       <h3>Preferências gerais</h3>
       <ul>
@@ -90,6 +78,7 @@
       </ul>
     </section>
   </main>
+  </div>
 </div>
 
 <script src="js/Settings.js"></script>

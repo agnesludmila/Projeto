@@ -1,115 +1,189 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body, html {
+/* Corpo e fonte */
+html, body {
   height: 100%;
   font-family: 'Istok Web', sans-serif;
   background-color: #f0f0f0;
 }
 
-
+/* Layout principal */
 .container {
   display: flex;
-  width: 100vw;
+  width: 99vw;
   height: 100vh;
-  background-color: white;
+  background-color: #f4f7fa;
 }
 
 .sidebar {
-  width: 350px; 
-  background-color: #b32b26;
+  position: fixed;
+  top: 70px;
+  width: 310px;
+  height: 100vh;
+  background-color: #B82727;
   color: white;
-  padding: 20px 20px;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
-  justify-content: flex-start;
+  border-radius: 5px;
+  justify-content: space-between;
 }
 
-.sidebar .perfil {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  margin-bottom: 20px;
-  text-align: center;
-  width: 100%; 
+.sidebar svg,
+.menu-lateral li i {
+  fill: white;
+  color: white;
+  stroke: white;
 }
 
-.sidebar .foto-perfil {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.sidebar .nome,
-.sidebar .email {
-  margin-left: 0; 
-}
-
-.sidebar nav ul {
+.menu-lateral {
   list-style: none;
   padding: 0;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.sidebar nav ul li {
-  margin: 25px 0;
-}
-
-.sidebar nav ul li a {
+.menu-lateral li {
   display: flex;
   align-items: center;
-  padding: 10px 15px;
+  gap: 10px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menu-lateral li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding-left: 10px;
+}
+
+.logout {
+  font-size: 14px;
+  color: #eee;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  cursor: pointer;
+}
+
+/* Usuário */
+.usuario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.perfil-img-sidebar {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.usuario-nome {
+  font-size: 1.5rem;
+  font-weight: bold;
   color: white;
-  text-decoration: none;
-  border-radius: 10px;
-  transition: background 0.3s;
-  font-size: 1.1rem;
-  gap: 15px; 
+  text-align: center;
 }
 
-.sidebar nav ul li a svg {
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-  fill: white;
+.usuario-email {
+  font-size: 0.8rem;
+  color: #f0f0f0;
+  text-align: center;
+  word-break: break-word;
 }
 
-.sidebar nav ul li a:hover {
-  background-color: #99231f;
+.top-header {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 27px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
 }
 
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+  color: #b82727;
+  font-family: 'Joan', sans-serif;
+}
 
-.conteudo {
+.logo span {
+  color: #222;
+}
+
+/* Search */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.search-icon {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.main {
   flex: 1;
-  padding: 40px;
-  background-color: #f7f7f7;
+  padding: 100px 40px 40px;
+  background-color: #f4f7fa;
   overflow-y: auto;
 }
 
-.conteudo h2 {
-  margin-bottom: 30px;
-  font-size: 24px;
+.main-content {
+  background-color: #f3f7fa;
+  padding: 50px;
+  border-radius: 12px;
+  margin-top: 70px;
 }
 
-
+/* Cards */
 .card {
+  width: 800px;
   background: white;
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-right: 50px;
+  gap: 15px;
+  cursor: pointer;
+  position: relative;
+  margin-left: 23rem;
 }
 
 .card h3 {
   margin-bottom: 15px;
-  font-size: 18px;
+  font-size: 30px;
 }
 
 .card ul {
@@ -141,8 +215,37 @@ body, html {
 }
 
 .card ul li span {
-  font-size: 18px;
+  font-size: 25px;
 }
-h2{
-  color:#b32b26;
+.conteudo{
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
 }
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.header-sidebar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  width: 100%;
+}
+
+.header-sidebar h2 {
+  font-size: 2rem;
+  text-align: center;
+  width: 100%;
+}
+
+
+

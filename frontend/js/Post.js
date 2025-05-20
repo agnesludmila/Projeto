@@ -151,3 +151,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const criarBtn = document.getElementById('criarPostBtn');
     criarBtn.addEventListener('click', criarPostagem);
 });
+
+const sidebar = document.querySelector('.sidebar');
+const toggleBtn = document.querySelector('.menu-toggle-btn');
+
+toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+});
+
