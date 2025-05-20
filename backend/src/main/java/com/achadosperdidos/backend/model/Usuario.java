@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 
+
 @Entity
 public class Usuario {
 
