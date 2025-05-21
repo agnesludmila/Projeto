@@ -9,7 +9,7 @@ if (!userId) {
     console.error('Usuário não autenticado.');
 }
 
-let postagens = []; // variável global para postagens
+let postagens = [];
 
 async function carregarPerfil() {
     try {
@@ -68,8 +68,15 @@ async function carregarPostagens() {
                 <div class="post-media">
                     <img src="${postagem.caminhoImagem ? `http://localhost:8080${postagem.caminhoImagem}` : './imgprofile/ImagemProfile.jpg'}" alt="Imagem da postagem" />
                 </div>
-                
-                <button class="link-button btn-contato" type="button">Ver contato</button>
+                <div class="post-actions">     
+                  <button class="btn-contato"
+                        data-postagem-id="${postagem.id}"
+                        data-telefone="${postagem.usuario?.telefone || ''}"
+                        data-email="${postagem.usuario?.email || ''}">
+                        Contato
+                  </button>
+
+                </div>
 
                 ${isDono ? `<button class="btn-apagar" data-id="${postagem.id}">Apagar</button>` : ''}
             `;
@@ -79,7 +86,6 @@ async function carregarPostagens() {
 
         configurarBotoesContato();
 
-        // Eventos apagar
         document.querySelectorAll('.btn-apagar').forEach(btn => {
             btn.addEventListener('click', async (e) => {
                 const id = e.target.getAttribute('data-id');
@@ -110,37 +116,35 @@ async function carregarPostagens() {
     }
 }
 
+
 function configurarBotoesContato() {
     const modalContato = document.getElementById('modalContato');
     const btnFecharContato = document.getElementById('closeContatoModal');
     const telefoneEl = document.getElementById('modalTelefone');
     const emailEl = document.getElementById('modalEmail');
 
-    document.querySelectorAll('.btn-contato').forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            const postagem = postagens[index];
-            if (!postagem || !postagem.usuario) return;
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('btn-contato')) {
+            const telefone = e.target.dataset.telefone || 'Não informado';
+            const email = e.target.dataset.email || 'Não informado';
 
-            const telefone = postagem.usuario.telefone || '';
-            const email = postagem.usuario.email || '';
+            telefoneEl.textContent = telefone;
+            emailEl.textContent = email;
 
-            telefoneEl.textContent = telefone || 'Não informado';
-            emailEl.textContent = email || 'Não informado';
-
-            if (telefone) {
+            if (telefone !== 'Não informado') {
                 telefoneEl.href = `tel:${telefone.replace(/\D/g, '')}`;
             } else {
                 telefoneEl.removeAttribute('href');
             }
 
-            if (email) {
+            if (email !== 'Não informado') {
                 emailEl.href = `mailto:${email}`;
             } else {
                 emailEl.removeAttribute('href');
             }
 
             modalContato.style.display = 'flex';
-        });
+        }
     });
 
     btnFecharContato.addEventListener('click', () => {
@@ -152,6 +156,7 @@ function configurarBotoesContato() {
             modalContato.style.display = 'none';
         }
     });
+
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -162,4 +167,58 @@ window.addEventListener('DOMContentLoaded', () => {
     criarBtn.addEventListener('click', criarPostagem);
 });
 
+async function criarPostagem(event) {
+    event.preventDefault(); // evita recarregar a página
 
+    const tituloInput = document.getElementById('titulo');
+    const descricaoInput = document.getElementById('descricao');
+    const imagemInput = document.getElementById('imagem-upload');
+
+    const titulo = tituloInput.value.trim();
+    const descricao = descricaoInput.value.trim();
+
+    if (!titulo) {
+        alert('Título é obrigatório!');
+        return;
+    }
+    const formData = new FormData();
+    formData.append("titulo", titulo);
+    formData.append("descricao", descricao);
+    formData.append("usuarioId", userId);
+
+    if (imagemInput.files.length > 0) {
+        formData.append("imagem", imagemInput.files[0]);
+    }
+
+    try {
+        const res = await fetch(`${API_URL}/criar`, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!res.ok) {
+            const errorMsg = await res.text();
+            throw new Error(errorMsg || 'Erro ao criar postagem');
+        }
+
+        tituloInput.value = '';
+        descricaoInput.value = '';
+        imagemInput.value = '';
+        document.getElementById('modalPublicacao').style.display = 'none';
+
+        alert('Postagem criada com sucesso!');
+        carregarPostagens();
+
+    } catch (err) {
+        alert('Erro ao criar postagem: ' + err.message);
+        console.error('Erro ao criar postagem:', err);
+    }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    carregarPerfil();
+    carregarPostagens();
+
+    const criarBtn = document.getElementById('criarPostBtn');
+    criarBtn.addEventListener('click', criarPostagem);
+});

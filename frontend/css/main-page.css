@@ -23,6 +23,8 @@ h2 {
   background-color: #f4f7fa;
 }
 .main {
+  width: 100%;
+  height: 100%;
   flex: 1;
   padding: 30px;
   overflow-y: auto;
@@ -31,6 +33,7 @@ h2 {
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 .main-content {
   flex: 1;
@@ -375,7 +378,7 @@ textarea {
   flex-direction: column;
   padding: 20px;
   width: 56rem;
-  margin: 5px 10px auto -16px;
+  margin: 2px 10px auto -16px;
 
 }
 
@@ -389,6 +392,36 @@ textarea {
   gap: 12px;
   overflow: hidden;
   border-radius: 20px;
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .feed-container {
+    width: 90%;
+    margin: 2px auto;
+    padding: 15px;
+  }
+
+  .post {
+    width: 100%;
+    padding: 14px 18px;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .feed-container {
+    width: 340px;
+    padding: 10px;
+    border-radius: 16px;
+  }
+
+  .post {
+
+    width: 336px;
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-left: 4px;
+  }
 }
 
 .post-header {
@@ -442,43 +475,66 @@ textarea {
   margin-top: 10px;
   border: 1px solid #ddd;
 }
+.post-actions {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #ddd;
+  padding: 4px 0;
+  background-color: #fff;
+  height: 26px;
+}
+.btn-contato {
+  width: 80px;
+  height: 26px;
+  font-size: 18px;
+  background-color: transparent;
+  color: black;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 4px 10px;
+  transition: background-color 0.2s ease;
+}
 
-/* Botão que parece link */
+.btn-contato:hover {
+  background-color: #f0f0f0;
+  border-radius: 6px;
+}
 .link-button {
   background: none;
   border: none;
-  color: #0066cc;
+  color: black;
   text-decoration: underline;
   cursor: pointer;
   font-size: 1rem;
   padding: 0;
+  width: 30px;
   font-family: inherit;
 }
 
-/* Fundo escuro do modal */
+
 .modal-backdrop {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.4);
-  display: none; /* inicialmente escondido */
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 1000;
 }
 
-/* Modal centralizado e pequeno */
 .modal {
   background: white;
   padding: 1.5rem 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  max-width: 320px;
-  width: 90%;
+  width: 360px;
   text-align: center;
   position: relative;
 }
 
-/* Botão fechar no canto superior direito */
 .close-btn {
   position: absolute;
   top: 8px;
@@ -490,15 +546,118 @@ textarea {
   color: #666;
 }
 
-/* Texto dentro do modal */
 .modal p {
-  margin: 0.5rem 0;
+  margin-top: 1rem;
   font-size: 1rem;
+  text-align: left;
 }
 
-/* Links de telefone e email dentro do modal */
 .modal a {
-  color: #0066cc;
+  color: black;
   text-decoration: underline;
   cursor: pointer;
+}
+@media (max-width: 1024px) and (min-width: 768px) {
+  .post-header img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .post-title {
+    font-size: 1.3rem;
+  }
+
+  .post-description {
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+
+  .post-media img {
+    width: 100%;
+    max-width: 450px;
+    max-height: 400px;
+  }
+
+  .btn-contato {
+    width: 70px;
+    font-size: 16px;
+  }
+
+  .link-button {
+    font-size: 0.9rem;
+    width: 25px;
+  }
+
+  .modal {
+    width: 320px;
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* Responsividade para celular */
+@media (max-width: 767px) {
+  .post-header {
+    gap: 10px;
+  }
+
+  .post-header img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .user-info .name {
+    font-size: 1rem;
+  }
+
+  .user-info .date {
+    font-size: 0.75rem;
+  }
+
+  .post-title {
+    font-size: 1.1rem;
+  }
+
+  .post-description {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+
+  .post-media img {
+    width: 100%;
+    max-width: 100%;
+    max-height: 300px;
+  }
+
+  .post-actions {
+    height: 30px;
+    padding: 6px 0;
+  }
+
+  .btn-contato {
+    width: 60px;
+    height: 24px;
+    font-size: 14px;
+    padding: 3px 8px;
+  }
+
+  .link-button {
+    font-size: 0.85rem;
+    width: 20px;
+  }
+
+  .modal {
+    width: 90%;
+    max-width: 280px;
+    padding: 1rem;
+  }
+
+  .close-btn {
+    font-size: 1.3rem;
+    top: 6px;
+    right: 8px;
+  }
+
+  .modal p {
+    font-size: 0.9rem;
+  }
 }

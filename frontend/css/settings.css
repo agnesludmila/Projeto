@@ -84,6 +84,19 @@ html, body {
   justify-content: center;
   margin-top: 20px;
 }
+.painel {
+  flex-basis: 300px; /* largura fixa do painel */
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.2);
+  display: none;
+}
+
+.painel.ativo {
+  display: block;
+}
 
 
 

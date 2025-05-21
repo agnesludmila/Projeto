@@ -22,7 +22,7 @@
       <ul class="menu-lateral">
         <div class="header-sidebar">
           <li class="usuario">
-            <img src="" alt="Foto de Perfil" class="perfil-img-sidebar" />
+            <img class="perfil-Sidebar" data-perfil-img />
             <span class="nome-usuario">Nome do usuário</span>
             <div class="usuario-email">nomedousuario@gmail.com</div>
           </li>
@@ -66,19 +66,36 @@
     <section class="card">
       <h3>Preferências gerais</h3>
       <ul>
-        <li><a href="#">Idioma <span>&rarr;</span></a></li>
-        <li><a href="#">Exibir fotos de perfil <span>&rarr;</span></a></li>
-        <li><a href="#">Efeitos sonoros <span>&rarr;</span></a></li>
+        <li><a href="#" onclick="abrirAba('idioma'); return false;">Idioma <span>&rarr;</span></a></li>
+        <li><a href="#" onclick="abrirAba('fotosPerfil'); return false;">Exibir fotos de perfil <span>&rarr;</span></a></li>
+        <li><a href="#" onclick="abrirAba('efeitosSonoros'); return false;">Efeitos sonoros <span>&rarr;</span></a></li>
       </ul>
     </section>
 
     <section class="card">
       <h3>Gerenciamento de conta</h3>
       <ul>
-        <li><a href="#">Colocar conta em hibernação <span>&rarr;</span></a></li>
-        <li><a href="#">Encerrar conta <span>&rarr;</span></a></li>
+        <li><a href="#" onclick="hibernarConta(); return false;">Colocar conta em hibernação <span>&rarr;</span></a></li>
+        <li><a href="#" onclick="encerrarConta(); return false;">Encerrar conta <span>&rarr;</span></a></li>
       </ul>
     </section>
+
+    <!-- Abas / Painéis -->
+    <div id="aba-idioma" class="painel oculto">
+      <h4>Configurações de Idioma</h4>
+      <p>Aqui você pode escolher o idioma do sistema.</p>
+    </div>
+    <div id="aba-fotosPerfil" class="painel oculto">
+      <h4>Exibir fotos de perfil</h4>
+      <p>Configurações para mostrar ou ocultar fotos de perfil.</p>
+    </div>
+    <div id="aba-efeitosSonoros" class="painel oculto">
+      <h4>Efeitos Sonoros</h4>
+      <label>
+        <input type="checkbox" id="efeitosToggle" />
+        Ativar efeitos sonoros ao clicar
+      </label>
+    </div>
   </main>
   </div>
 </div>
