@@ -73,7 +73,7 @@ async function carregarPostagens() {
             <img src="${postagem.caminhoImagem ? `http://localhost:8080${postagem.caminhoImagem}` : './imgprofile/ImagemProfile.jpg'}" alt="Imagem da postagem" />
         </div>
         <div class="post-actions">     
-          <button class="btn-contato"
+         <button class="btn-contato"
                 data-postagem-id="${postagem.id}"
                 data-contato="${postagem.contato || ''}"
                 data-email="${postagem.email || ''}">
