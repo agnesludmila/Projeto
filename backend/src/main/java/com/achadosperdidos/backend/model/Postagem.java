@@ -25,7 +25,7 @@ public class Postagem {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id")
-    @JsonIgnoreProperties("postagens")
+    @JsonBackReference
     private Usuario usuario;
 
 

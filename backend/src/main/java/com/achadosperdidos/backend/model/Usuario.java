@@ -33,8 +33,8 @@ public class Usuario {
     private Perfil perfil;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Postagem> postagens = new ArrayList<>();
-
     public String getToken(){
         return token;
     }

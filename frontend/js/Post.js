@@ -47,39 +47,42 @@ async function carregarPostagens() {
             return;
         }
 
+
         postagens.forEach(postagem => {
-            const isDono = postagem.usuario?.id === Number(userId);
+            console.log('postagem.usuarioId:', postagem.usuarioId, typeof postagem.usuarioId);
+            console.log('userId:', userId, typeof userId);
+
+            const isDono = Number(postagem.usuarioId) === Number(userId);
 
             const postagemEl = document.createElement('div');
             postagemEl.classList.add('post');
 
             postagemEl.innerHTML = `
-                <div class="post-header">
-                   <img src="${postagem.usuario?.fotoPerfil ? `http://localhost:8080${postagem.usuario.fotoPerfil}` : './imgprofile/ImagemProfile.jpg'}" alt="Foto do autor" />
-                    <div class="user-info">
-                        <span class="name">${postagem.usuario?.nome || 'Desconhecido'}</span>
-                        <span class="date">${new Date(postagem.dataCriacao).toLocaleString()}</span>
-                    </div>
-                </div>
+        <div class="post-header">
+           <img src="${postagem.fotoPerfil ? `http://localhost:8080${postagem.fotoPerfil}` : './imgprofile/ImagemProfile.jpg'}" alt="Foto do autor" />
+            <div class="user-info">
+                <span class="name">${postagem.nomeUsuario || 'Desconhecido'}</span>
+                <span class="date">${new Date(postagem.dataCriacao).toLocaleString()}</span>
+            </div>
+        </div>
 
-                <h3 class="post-title">${postagem.titulo}</h3>
-                <p class="post-description">${postagem.descricao || ''}</p>
+        <h3 class="post-title">${postagem.titulo}</h3>
+        <p class="post-description">${postagem.descricao || ''}</p>
 
-                <div class="post-media">
-                    <img src="${postagem.caminhoImagem ? `http://localhost:8080${postagem.caminhoImagem}` : './imgprofile/ImagemProfile.jpg'}" alt="Imagem da postagem" />
-                </div>
-                <div class="post-actions">     
-                  <button class="btn-contato"
-                        data-postagem-id="${postagem.id}"
-                        data-telefone="${postagem.usuario?.telefone || ''}"
-                        data-email="${postagem.usuario?.email || ''}">
-                        Contato
-                  </button>
+        <div class="post-media">
+            <img src="${postagem.caminhoImagem ? `http://localhost:8080${postagem.caminhoImagem}` : './imgprofile/ImagemProfile.jpg'}" alt="Imagem da postagem" />
+        </div>
+        <div class="post-actions">     
+          <button class="btn-contato"
+                data-postagem-id="${postagem.id}"
+                data-contato="${postagem.contato || ''}"
+                data-email="${postagem.email || ''}">
+                Contato
+          </button>
+        </div>
 
-                </div>
-
-                ${isDono ? `<button class="btn-apagar" data-id="${postagem.id}">Apagar</button>` : ''}
-            `;
+        ${isDono ? `<button class="btn-apagar" data-id="${postagem.id}">Apagar</button>` : ''}
+    `;
 
             listaPostagensEl.appendChild(postagemEl);
         });
@@ -116,7 +119,6 @@ async function carregarPostagens() {
     }
 }
 
-
 function configurarBotoesContato() {
     const modalContato = document.getElementById('modalContato');
     const btnFecharContato = document.getElementById('closeContatoModal');
@@ -125,14 +127,14 @@ function configurarBotoesContato() {
 
     document.addEventListener('click', function (e) {
         if (e.target.classList.contains('btn-contato')) {
-            const telefone = e.target.dataset.telefone || 'Não informado';
+            const contato = e.target.dataset.contato || 'Não informado';
             const email = e.target.dataset.email || 'Não informado';
 
-            telefoneEl.textContent = telefone;
+            telefoneEl.textContent = contato;
             emailEl.textContent = email;
 
-            if (telefone !== 'Não informado') {
-                telefoneEl.href = `tel:${telefone.replace(/\D/g, '')}`;
+            if (contato !== 'Não informado') {
+                telefoneEl.href = `tel:${contato.replace(/\D/g, '')}`;
             } else {
                 telefoneEl.removeAttribute('href');
             }
@@ -184,7 +186,7 @@ async function criarPostagem(event) {
     const formData = new FormData();
     formData.append("titulo", titulo);
     formData.append("descricao", descricao);
-    formData.append("usuarioId", userId);
+    formData.append("usuarioId", String(userId));
 
     if (imagemInput.files.length > 0) {
         formData.append("imagem", imagemInput.files[0]);
@@ -214,11 +216,3 @@ async function criarPostagem(event) {
         console.error('Erro ao criar postagem:', err);
     }
 }
-
-window.addEventListener('DOMContentLoaded', () => {
-    carregarPerfil();
-    carregarPostagens();
-
-    const criarBtn = document.getElementById('criarPostBtn');
-    criarBtn.addEventListener('click', criarPostagem);
-});
