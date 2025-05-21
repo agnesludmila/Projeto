@@ -1,70 +1,90 @@
 body {
     font-family: 'Inter', sans-serif;
-    background: #efefef;
+    background: #efefef;    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+h2{
+    font-size: 45px;
+    margin: 0;
+    margin-left: 1.8rem;
+    margin-top: 0.8rem;
 }
 .container {
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    min-height: 96vh;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .box {
+    margin: 30px;
     align-content: center;
     background-color: white;
     width: 55rem;
-    height: 35rem;
+    height: 33rem;
     border-radius: 20px;
     display: flex; 
     padding: 2rem;  
     position: relative;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     align-items: flex-end;
     box-shadow: 0 2px 9px rgba(0, 0, 0, 0.15);
-
-
 }
 .left-column{
-    width: 55rem;
+    width: 30rem;
     height: 36rem;
     padding: 0;
 }
 
 .personal-info {
-    background-color: transparent;
+    background-color: white;
     display: flex;
     flex-direction: column ;
-    width: 380px;
-    height: 15rem;
+    width: 480px;
+    height: 13rem;
     border-radius: 7px;
     gap: 1.5rem;
-    margin-left: 0rem;
+    margin-top: 20px;
+}
+
+.personal-contact {
+    background-color: white ;
+    display: flex;
+    flex-direction: column ;
+    width: 400px;
+    height: 207px;
+    border-radius: 7px;
+    gap: 0.8rem;
+    margin-bottom: 15px;
+    margin-left: 2rem;
 }
 .title{
-    font-size: 1.5rem;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    font-size: 2.5rem;
+    margin-bottom: -4px;
     color: black;
+    margin-left: 1rem;
+    margin-top: 0.8rem;
 }
 
 .subtitle{
     color: rgb(73, 73, 73);
-    font-size: 1rem;
+    font-size: 1.5rem;
     margin-top: 0;
-    margin-bottom: 30px;
+    margin-left: 1rem;
 
 }
 
 .position-img {
     position: relative; /* necessário para posicionar o botão sobre a imagem */
     width: fit-content;
-    margin-top: 5px;
-    margin-bottom: 0;
+    margin-left: 20px;
+    margin-top: 38px;
 }
 
 .img {
-    width: 330px;
-    height: 330px;
+    width: 290px;
+    height: 290px;
     border-radius: 100%;
     object-fit: cover;
     box-shadow: 0 0 6px #dcdcdc;
@@ -94,11 +114,11 @@ body {
 .texto{
     color: black;
     font-size: 15px;
-    margin: 0;
 }
 .label {
     font-weight: bold;
     margin-right: 0.3rem;
+
 }
 
 .inline-link {
@@ -108,16 +128,15 @@ body {
 
 .profile-right {
   position: absolute;
-  top: 10px;
-  right: 10px;
+    top: 7rem;
+    right: 5rem;
   background-color: transparent;
-  width: 499px;
-  height: 300px;
+  width: 500px;
+  height: 110px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 28px;
+  gap: 1.5rem;
 }
 
 .info-line {
@@ -128,6 +147,7 @@ body {
 }
 .label {
   font-weight: bold;
+    margin-left: 2rem;
 }
 .value {
   font-family: monospace;

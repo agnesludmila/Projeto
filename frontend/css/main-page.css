@@ -9,6 +9,7 @@ html {
   height: 100%;
   font-family: Arial, sans-serif;
   background-color: white;
+  overflow-x: hidden;
 }
 h2 {
   text-align: center;
@@ -29,6 +30,7 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
 }
 .main-content {
   flex: 1;
@@ -371,32 +373,28 @@ textarea {
 .feed-container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
   padding: 20px;
-  max-width: 600px;
-  margin: auto;
+  width: 56rem;
+  margin: 5px 10px auto -16px;
+
 }
 
 .post {
+  width: 55rem;
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   padding: 16px 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   overflow: hidden;
-  transition: transform 0.2s;
-}
-
-.post:hover {
-  transform: translateY(-2px);
+  border-radius: 20px;
 }
 
 .post-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .post-header img {
@@ -423,7 +421,7 @@ textarea {
 }
 
 .post-title {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #222;
 }
@@ -431,12 +429,13 @@ textarea {
 .post-description {
   font-size: 1rem;
   color: #444;
-  line-height: 1.5;
+  line-height: 1;
   white-space: pre-wrap;
 }
 
 .post-media img {
-  width: 100%;
+  width: 500px;
+  max-width: 500px;
   max-height: 450px;
   object-fit: cover;
   border-radius: 10px;
@@ -444,3 +443,62 @@ textarea {
   border: 1px solid #ddd;
 }
 
+/* Botão que parece link */
+.link-button {
+  background: none;
+  border: none;
+  color: #0066cc;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  font-family: inherit;
+}
+
+/* Fundo escuro do modal */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: none; /* inicialmente escondido */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal centralizado e pequeno */
+.modal {
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+}
+
+/* Botão fechar no canto superior direito */
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+/* Texto dentro do modal */
+.modal p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* Links de telefone e email dentro do modal */
+.modal a {
+  color: #0066cc;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -9,7 +9,8 @@ if (!userId) {
     console.error('Usuário não autenticado.');
 }
 
-// Função para carregar o perfil do usuário logado
+let postagens = []; // variável global para postagens
+
 async function carregarPerfil() {
     try {
         const res = await fetch(`http://localhost:8080/perfil/${userId}`);
@@ -19,22 +20,27 @@ async function carregarPerfil() {
         nomeUsuarioEl.textContent = data.nome || 'Nome não definido';
         emailUsuarioEl.textContent = data.email || 'Email não informado';
 
-        perfilImgEl.src = data.fotoPerfil
-            ? `http://localhost:8080${data.fotoPerfil}?t=${Date.now()}`
-            : './imgprofile/ImagemProfile.jpg';
+        document.querySelectorAll('[data-perfil-img]').forEach(img => {
+            img.src = data.fotoPerfil
+                ? `http://localhost:8080${data.fotoPerfil}?t=${Date.now()}`
+                : './imgprofile/ImagemProfile.jpg';
+
+            img.onerror = function () {
+                this.src = 'https://www.svgrepo.com/show/382106/user-alt.svg';
+            };
+        });
     } catch (err) {
         console.error('Erro ao carregar perfil:', err);
     }
 }
 
-// Função para carregar todas as postagens
 async function carregarPostagens() {
     try {
         const res = await fetch(`${API_URL}/todas`);
         if (!res.ok) throw new Error('Erro ao buscar postagens');
-        const postagens = await res.json();
+        postagens = await res.json(); // salva globalmente
 
-        listaPostagensEl.innerHTML = ''; // limpa antes de adicionar
+        listaPostagensEl.innerHTML = '';
 
         if (postagens.length === 0) {
             listaPostagensEl.innerHTML = '<p>Nenhuma postagem encontrada.</p>';
@@ -43,27 +49,37 @@ async function carregarPostagens() {
 
         postagens.forEach(postagem => {
             const isDono = postagem.usuario?.id === Number(userId);
-            console.log('Postagem de:', postagem.usuario?.id, ' | Usuário logado:', userId);
 
             const postagemEl = document.createElement('div');
-            postagemEl.classList.add('postagem');
+            postagemEl.classList.add('post');
 
             postagemEl.innerHTML = `
-                <h3>${postagem.titulo}</h3>
-                <p>${postagem.descricao || ''}</p>
-                <div>
-                    <img src="${postagem.caminhoImagem ? `http://localhost:8080${postagem.caminhoImagem}` : './imgprofile/ImagemProfile.jpg'}"
-                         alt="Imagem da postagem" style="max-width: 200px; max-height: 150px;" />
+                <div class="post-header">
+                   <img src="${postagem.usuario?.fotoPerfil ? `http://localhost:8080${postagem.usuario.fotoPerfil}` : './imgprofile/ImagemProfile.jpg'}" alt="Foto do autor" />
+                    <div class="user-info">
+                        <span class="name">${postagem.usuario?.nome || 'Desconhecido'}</span>
+                        <span class="date">${new Date(postagem.dataCriacao).toLocaleString()}</span>
+                    </div>
                 </div>
-                <p><strong>Autor:</strong> ${postagem.usuario?.nome || 'Desconhecido'}</p>
-                <p><small>Criado em: ${new Date(postagem.dataCriacao).toLocaleString()}</small></p>
+
+                <h3 class="post-title">${postagem.titulo}</h3>
+                <p class="post-description">${postagem.descricao || ''}</p>
+
+                <div class="post-media">
+                    <img src="${postagem.caminhoImagem ? `http://localhost:8080${postagem.caminhoImagem}` : './imgprofile/ImagemProfile.jpg'}" alt="Imagem da postagem" />
+                </div>
+                
+                <button class="link-button btn-contato" type="button">Ver contato</button>
+
                 ${isDono ? `<button class="btn-apagar" data-id="${postagem.id}">Apagar</button>` : ''}
             `;
 
             listaPostagensEl.appendChild(postagemEl);
         });
 
-        // Adicionar evento de clique para todos os botões "Apagar"
+        configurarBotoesContato();
+
+        // Eventos apagar
         document.querySelectorAll('.btn-apagar').forEach(btn => {
             btn.addEventListener('click', async (e) => {
                 const id = e.target.getAttribute('data-id');
@@ -80,7 +96,7 @@ async function carregarPostagens() {
                             throw new Error(errMsg || 'Erro ao apagar postagem');
                         }
                         alert('Postagem apagada com sucesso!');
-                        carregarPostagens(); // Recarregar lista após apagar
+                        carregarPostagens();
                     } catch (err) {
                         alert('Erro ao apagar postagem: ' + err.message);
                         console.error(err);
@@ -94,56 +110,50 @@ async function carregarPostagens() {
     }
 }
 
-// Função para criar uma postagem usando multipart/form-data
-async function criarPostagem() {
-    const tituloInput = document.getElementById('titulo');
-    const descricaoInput = document.getElementById('descricao');
-    const imagemInput = document.getElementById('imagem-upload');
+function configurarBotoesContato() {
+    const modalContato = document.getElementById('modalContato');
+    const btnFecharContato = document.getElementById('closeContatoModal');
+    const telefoneEl = document.getElementById('modalTelefone');
+    const emailEl = document.getElementById('modalEmail');
 
-    const titulo = tituloInput.value.trim();
-    const descricao = descricaoInput.value.trim();
+    document.querySelectorAll('.btn-contato').forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            const postagem = postagens[index];
+            if (!postagem || !postagem.usuario) return;
 
-    if (!titulo) {
-        alert('Título é obrigatório!');
-        return;
-    }
+            const telefone = postagem.usuario.telefone || '';
+            const email = postagem.usuario.email || '';
 
-    const formData = new FormData();
-    formData.append("titulo", titulo);
-    formData.append("descricao", descricao);
-    formData.append("usuarioId", userId);
+            telefoneEl.textContent = telefone || 'Não informado';
+            emailEl.textContent = email || 'Não informado';
 
-    if (imagemInput.files.length > 0) {
-        formData.append("imagem", imagemInput.files[0]);
-    }
+            if (telefone) {
+                telefoneEl.href = `tel:${telefone.replace(/\D/g, '')}`;
+            } else {
+                telefoneEl.removeAttribute('href');
+            }
 
-    try {
-        const res = await fetch(`${API_URL}/criar`, {
-            method: 'POST',
-            body: formData
+            if (email) {
+                emailEl.href = `mailto:${email}`;
+            } else {
+                emailEl.removeAttribute('href');
+            }
+
+            modalContato.style.display = 'flex';
         });
+    });
 
-        if (!res.ok) {
-            const errorMsg = await res.text();
-            throw new Error(errorMsg || 'Erro ao criar postagem');
+    btnFecharContato.addEventListener('click', () => {
+        modalContato.style.display = 'none';
+    });
+
+    modalContato.addEventListener('click', (e) => {
+        if (e.target === modalContato) {
+            modalContato.style.display = 'none';
         }
-
-        // Limpar o formulário e fechar o modal
-        tituloInput.value = '';
-        descricaoInput.value = '';
-        imagemInput.value = '';
-        document.getElementById('modalPublicacao').style.display = 'none';
-
-        alert('Postagem criada com sucesso!');
-        carregarPostagens();
-
-    } catch (err) {
-        alert('Erro ao criar postagem: ' + err.message);
-        console.error('Erro ao criar postagem:', err);
-    }
+    });
 }
 
-// Inicialização
 window.addEventListener('DOMContentLoaded', () => {
     carregarPerfil();
     carregarPostagens();
@@ -152,10 +162,4 @@ window.addEventListener('DOMContentLoaded', () => {
     criarBtn.addEventListener('click', criarPostagem);
 });
 
-const sidebar = document.querySelector('.sidebar');
-const toggleBtn = document.querySelector('.menu-toggle-btn');
-
-toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
-});
 
