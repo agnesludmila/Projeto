@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-
-
-
 @Entity
 public class Usuario {
 
@@ -36,7 +33,6 @@ public class Usuario {
     private Perfil perfil;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Postagem> postagens = new ArrayList<>();
 
     public String getToken(){

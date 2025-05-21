@@ -3,6 +3,7 @@ package com.achadosperdidos.backend.controller;
 import com.achadosperdidos.backend.model.Postagem;
 import com.achadosperdidos.backend.model.Usuario;
 import com.achadosperdidos.backend.model.Perfil;
+import com.achadosperdidos.backend.dto.PostagemDTO;
 import com.achadosperdidos.backend.repository.PostagemRepository;
 import com.achadosperdidos.backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +17,7 @@ import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/postagem")
@@ -37,6 +39,7 @@ public class PostagemController {
                                            @RequestParam("descricao") String descricao,
                                            @RequestParam("usuarioId") Long usuarioId,
                                            @RequestParam(value = "imagem", required = false) MultipartFile imagem) {
+        System.out.println("Recebido usuarioId: " + usuarioId);
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
         if (usuarioOpt.isEmpty()) {
             return ResponseEntity.badRequest().body("Usuário não encontrado");
@@ -86,8 +89,14 @@ public class PostagemController {
     }
 
     @GetMapping("/todas")
-    public List<Postagem> listarPostagens() {
-        return postagemRepository.findAll();
+    public ResponseEntity<List<PostagemDTO>> listarPostagens() {
+        List<Postagem> postagens = postagemRepository.findAll();
+
+        List<PostagemDTO> dtos = postagens.stream()
+                .map(PostagemDTO::new)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(dtos);
     }
 
     @DeleteMapping("/deletar/{id}")
