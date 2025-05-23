@@ -76,9 +76,9 @@ public class ResetController {
 
         Usuario usuario = usuarioOpt.get();
 
-        // Atualiza a senha do usuário
+
         usuario.setSenha(novaSenha);
-        usuario.setToken(null);  // Limpar o token após redefinir a senha
+        usuario.setToken(null);
         usuarioRepository.save(usuario);
 
         resposta.put("codigo", 0);

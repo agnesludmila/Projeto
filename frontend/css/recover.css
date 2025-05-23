@@ -39,14 +39,18 @@ main {
     width: 50%;
     display: flex;
     flex-direction: column;
-    justify-items: space-between;
     align-items: center;
-    padding: 78px 0;
+    padding: 88px 0;
 }
 
 .form-tela1{
-    background-color: #B82727;
-    padding: 67px;
+    background-color: #911e1e;
+    padding: 78px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .form-tela2{
@@ -75,7 +79,7 @@ main {
     align-items: center;
     width: 25%;
     height: 60vh;
-    margin: 150px auto;    /* Aumentando a margem superior para descer mais */
+    margin: 150px auto;
     padding: 20px;
 }
 
@@ -83,7 +87,7 @@ main {
     font-size: 2rem;
     margin-bottom: 60px;
     font-family: 'Joan', sans-serif;
-    color: #B82727;
+    color: #911e1e;
 }
 
 .form-input-reset{
@@ -99,13 +103,15 @@ main {
     width: 300px;
     font-size: 0.9rem;
     padding: 0;
-    margin: 0 0 15px 0;
+    gap: 10px;
     font-family: 'Joan', sans-serif;
     text-decoration: none;
-    color: #B82727;
+    color: #911e1e;
     text-align: left;
     line-height: 1.2rem;
+    margin-bottom: 20px;
 }
+
 @media (max-width: 768px){
     .form-input-reset{
         width: 100%;
@@ -117,9 +123,12 @@ main {
         box-shadow: none;
     }
 }
-
+.button-a{
+    margin-bottom: -70px;
+    margin-top: 30px;
+}
 .error-message {
-    color: #f44336;
+    color: #911e1e;
     font-size: 0.64rem;
     margin-top: 1px;
     min-height: 0.64rem;

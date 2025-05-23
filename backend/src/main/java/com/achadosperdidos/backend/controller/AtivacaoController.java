@@ -24,10 +24,8 @@ public class AtivacaoController {
     public ResponseEntity<Map<String, Object>> ativarConta(@RequestBody Map<String, String> request) {
         Map<String, Object> resposta = new HashMap<>();
 
-        // Pega o token do corpo da requisição
         String token = request.get("token");
 
-        // Verifica se o token de ativação é válido
         Optional<Usuario> usuarioOpt = usuarioRepository.findByToken(token);
 
         if (usuarioOpt.isEmpty()) {
@@ -38,7 +36,6 @@ public class AtivacaoController {
 
         Usuario usuario = usuarioOpt.get();
 
-        // Marca a conta como ativada
         usuario.setAtivo(true);
         usuario.setToken(null);
         usuarioRepository.save(usuario);

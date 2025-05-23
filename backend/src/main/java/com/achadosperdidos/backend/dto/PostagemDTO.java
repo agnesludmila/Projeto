@@ -49,7 +49,6 @@ public class PostagemDTO {
         }
     }
 
-    // Getters e setters (pode gerar automaticamente no IDE)
 
     public Long getId() {
         return id;

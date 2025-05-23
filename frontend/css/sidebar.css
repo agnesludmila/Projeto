@@ -3,7 +3,7 @@
     top: 70px;
     width: 310px;
     height: 100vh;
-    background-color: #B82727;
+    background-color: #911e1e;
     color: white;
     padding: 40px 20px;
     display: flex;
@@ -249,7 +249,7 @@
 .logo {
     font-size: 23px;
     font-weight: bold;
-    color: #b82727;
+    color: #911e1e;
     font-family: 'Joan', sans-serif;
 }
 

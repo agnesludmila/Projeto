@@ -73,15 +73,19 @@ async function carregarPostagens() {
             <img src="${postagem.caminhoImagem ? `http://localhost:8080${postagem.caminhoImagem}` : './imgprofile/ImagemProfile.jpg'}" alt="Imagem da postagem" />
         </div>
         <div class="post-actions">     
-         <button class="btn-contato"
+            <button class="btn-contato"
                 data-postagem-id="${postagem.id}"
                 data-contato="${postagem.contato || ''}"
                 data-email="${postagem.email || ''}">
-                Contato
-          </button>
-        </div>
+                <i class="fas fa-phone"></i> Contato
+            </button>
 
-        ${isDono ? `<button class="btn-apagar" data-id="${postagem.id}">Apagar</button>` : ''}
+            ${isDono ? `
+            <button class="btn-apagar" data-id="${postagem.id}">
+                <i class="fas fa-trash-alt"></i> Apagar
+            </button>
+             ` : ''}
+        </div>
     `;
 
             listaPostagensEl.appendChild(postagemEl);
@@ -92,7 +96,19 @@ async function carregarPostagens() {
         document.querySelectorAll('.btn-apagar').forEach(btn => {
             btn.addEventListener('click', async (e) => {
                 const id = e.target.getAttribute('data-id');
-                if (confirm('Tem certeza que deseja apagar esta postagem?')) {
+
+                const resultado = await Swal.fire({
+                    title: 'Tem certeza?',
+                    text: "Deseja apagar esta postagem?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: 'green',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sim, apagar!',
+                    cancelButtonText: 'Cancelar'
+                });
+
+                if (resultado.isConfirmed) {
                     try {
                         const resDel = await fetch(`${API_URL}/deletar/${id}`, {
                             method: 'DELETE',
@@ -100,19 +116,31 @@ async function carregarPostagens() {
                                 'userId': userId
                             }
                         });
+
                         if (!resDel.ok) {
                             const errMsg = await resDel.text();
                             throw new Error(errMsg || 'Erro ao apagar postagem');
                         }
-                        alert('Postagem apagada com sucesso!');
+
+                        await Swal.fire(
+                            'Apagado!',
+                            'Postagem apagada com sucesso.',
+                            'success'
+                        );
+
                         carregarPostagens();
                     } catch (err) {
-                        alert('Erro ao apagar postagem: ' + err.message);
+                        Swal.fire(
+                            'Erro!',
+                            'Erro ao apagar postagem: ' + err.message,
+                            'error'
+                        );
                         console.error(err);
                     }
                 }
             });
         });
+
 
     } catch (err) {
         console.error('Erro ao carregar postagens:', err);
@@ -208,7 +236,6 @@ async function criarPostagem(event) {
         imagemInput.value = '';
         document.getElementById('modalPublicacao').style.display = 'none';
 
-        alert('Postagem criada com sucesso!');
         carregarPostagens();
 
     } catch (err) {
