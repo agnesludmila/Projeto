@@ -34,19 +34,59 @@ async function carregarPerfil() {
     }
 }
 
+function exibirPostagens(lista) {
+    listaPostagensEl.innerHTML = '';
+
+    if (lista.length === 0) {
+        listaPostagensEl.innerHTML = '<p>Nenhuma postagem encontrada.</p>';
+        return;
+    }
+
+    lista.forEach(postagem => {
+        const isDono = Number(postagem.usuarioId) === Number(userId);
+
+        const postagemEl = document.createElement('div');
+        postagemEl.classList.add('post');
+
+        postagemEl.innerHTML = `
+            <div class="post-header">
+                <img src="${postagem.fotoPerfil ? `http://localhost:8080${postagem.fotoPerfil}` : './imgprofile/ImagemProfile.jpg'}" alt="Foto do autor" />
+                <div class="user-info">
+                    <span class="name">${postagem.nomeUsuario || 'Desconhecido'}</span>
+                    <span class="date">${new Date(postagem.dataCriacao).toLocaleString()}</span>
+                </div>
+            </div>
+            <h3 class="post-title">${postagem.titulo}</h3>
+            <p class="post-description">${postagem.descricao || ''}</p>
+            <div class="post-media">
+                <img src="${postagem.caminhoImagem ? `http://localhost:8080${postagem.caminhoImagem}` : './imgprofile/ImagemProfile.jpg'}" alt="Imagem da postagem" />
+            </div>
+            <div class="post-actions">
+                <button class="btn-contato"
+                    data-postagem-id="${postagem.id}"
+                    data-contato="${postagem.contato || ''}"
+                    data-email="${postagem.email || ''}">
+                    <i class="fas fa-phone"></i> Contato
+                </button>
+                ${isDono ? `
+                    <button class="btn-apagar" data-id="${postagem.id}">
+                        <i class="fas fa-trash-alt"></i> Apagar
+                    </button>
+                ` : ''}
+            </div>
+        `;
+
+        listaPostagensEl.appendChild(postagemEl);
+    });
+
+    configurarBotoesContato();
+}
+
 async function carregarPostagens() {
     try {
         const res = await fetch(`${API_URL}/todas`);
         if (!res.ok) throw new Error('Erro ao buscar postagens');
-        postagens = await res.json(); // salva globalmente
-
-        listaPostagensEl.innerHTML = '';
-
-        if (postagens.length === 0) {
-            listaPostagensEl.innerHTML = '<p>Nenhuma postagem encontrada.</p>';
-            return;
-        }
-
+        postagens = await res.json();
 
         postagens.forEach(postagem => {
             console.log('postagem.usuarioId:', postagem.usuarioId, typeof postagem.usuarioId);
@@ -189,12 +229,21 @@ function configurarBotoesContato() {
 
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    carregarPerfil();
-    carregarPostagens();
+window.addEventListener('DOMContentLoaded', async () => {
+    await carregarPerfil();
+    await carregarPostagens();
 
     const criarBtn = document.getElementById('criarPostBtn');
     criarBtn.addEventListener('click', criarPostagem);
+
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
+        const termo = searchInput.value.toLowerCase().trim();
+        const resultados = postagens.filter(p =>
+            p.titulo.toLowerCase().includes(termo)
+        );
+        exibirPostagens(resultados);
+    });
 });
 
 async function criarPostagem(event) {

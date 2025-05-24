@@ -82,10 +82,10 @@ main {
 }
 
 body {
-    font-family: 'Joan', sans-serif;
-    transition: opacity 0.3s ease;/* Transição suave de opacidade */
+    font-family: 'Istok Web', sans-serif;
+    transition: opacity 0.3s ease;
 }
 
 .fade {
-    opacity: 0; /* Quando a classe fade for adicionada, a opacidade vai para 0 */
+    opacity: 0;
 }
