@@ -1,5 +1,5 @@
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Istok Web', sans-serif;
     background: #efefef;    overflow-x: hidden;
     overflow-y: hidden;
     height: 100%;
@@ -24,8 +24,8 @@ h2{
     width: 55rem;
     height: 33rem;
     border-radius: 20px;
-    display: flex; 
-    padding: 2rem;  
+    display: flex;
+    padding: 2rem;
     position: relative;
     justify-content: flex-start;
     align-items: flex-end;
@@ -76,7 +76,7 @@ h2{
 }
 
 .position-img {
-    position: relative; /* necessário para posicionar o botão sobre a imagem */
+    position: relative;
     width: fit-content;
     margin-left: 20px;
     margin-top: 38px;
@@ -127,30 +127,30 @@ h2{
 
 
 .profile-right {
-  position: absolute;
+    position: absolute;
     top: 7rem;
     right: 5rem;
-  background-color: transparent;
-  width: 500px;
-  height: 110px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+    background-color: transparent;
+    width: 500px;
+    height: 110px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .info-line {
-  display: flex;
-  justify-content: space-between;
-  width: 450px; /* ou o tamanho que quiser */
-  margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    width: 450px;
+    margin: 0.5rem 0;
 }
 .label {
-  font-weight: bold;
+    font-weight: bold;
     margin-left: 2rem;
 }
 .value {
-  font-family: monospace;
+    font-family: monospace;
 }
 .modal {
     display: none;
@@ -184,7 +184,6 @@ h2{
     cursor: pointer;
 }
 
-/* Form container centralizado */
 .modal-content form {
     display: flex;
     flex-direction: column;

@@ -2,16 +2,16 @@
     font-size: 3rem;
     margin-bottom: 42px;
     font-family: 'Istok Web', sans-serif;
-    font-weight: 300; 
+    font-weight: 300;
     color: #911e1e;
 }
 .form-title-red{
     font-size: 3rem;
     margin-bottom: 20px;
-    font-family: 'Joan', sans-serif;
-    font-weight: 300; 
+    font-family: 'Istok Web', sans-serif;
+    font-weight: 300;
     color:white;
-    
+
 }
 
 .form-input-container{
@@ -43,7 +43,7 @@
     padding: 0;
     width: fit-content;
     margin: 0 auto;
-    font-family: 'Joan', sans-serif;
+    font-family: 'Istok Web', sans-serif;
     text-decoration: none;
     color: white;
     text-align: center;
@@ -70,15 +70,15 @@
 
 .form-button:hover {
     background-color: #911e1e;
-    color: white;               
+    color: white;
 }
 .form-button-light{
-    border: 2px solid #D3D3D3;
-    color:#D3D3D3;
+    border: 2px solid white;
+    color:white;
 }
 
 .form-button-light:hover {
-    background-color: white; 
+    background-color: white;
     color: #911e1e;
 }
 
@@ -89,5 +89,4 @@
 .link-color-red{
     color:white;
 }
-
 

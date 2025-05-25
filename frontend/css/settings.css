@@ -1,4 +1,3 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -85,7 +84,7 @@ html, body {
   margin-top: 20px;
 }
 .painel {
-  flex-basis: 300px; /* largura fixa do painel */
+  flex-basis: 300px;
   background: white;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -97,7 +96,6 @@ html, body {
 .painel.ativo {
   display: block;
 }
-
 
 
 
