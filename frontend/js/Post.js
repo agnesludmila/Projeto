@@ -12,6 +12,9 @@ const sidebarEmailUsuarioEl = document.querySelector('.sidebar .usuario-email');
 // Elementos de busca principal (do seu HTML)
 const mainSearchInputEl = document.getElementById('searchInput');
 const searchButtonEl = document.getElementById('searchToggle');
+const categoriasDropdownEl = document.getElementById('categoriasDropdown');
+const listaCategoriasEl = document.getElementById('listaCategorias');
+const feedbackCategoriasEl = document.getElementById('feedbackCategorias');
 
 // Modal de Publicação
 const modalPublicacaoEl = document.getElementById('modalPublicacao');
@@ -169,16 +172,16 @@ async function carregarTodasPostagens() {
     }
 }
 
-async function abrirModalComCategoriasSugeridas() {
-    if (!modalCategoriasDinamicasEl || !listaCategoriasDinamicasUlEl || !feedbackCategoriasDinamicasEl) {
-        Swal.fire('Erro de Interface', 'Elementos do modal de categorias não foram encontrados na página. Verifique o HTML.', 'error');
+async function mostrarCategoriasSugeridas() {
+    if (!categoriasDropdownEl || !listaCategoriasEl || !feedbackCategoriasEl) {
+        console.error('Elementos do dropdown de categorias não foram encontrados');
         return;
     }
 
-    listaCategoriasDinamicasUlEl.innerHTML = '';
-    feedbackCategoriasDinamicasEl.textContent = 'Carregando sugestões de categorias...';
-    feedbackCategoriasDinamicasEl.style.display = 'block';
-    modalCategoriasDinamicasEl.style.display = 'flex';
+    listaCategoriasEl.innerHTML = '';
+    feedbackCategoriasEl.textContent = 'Carregando sugestões...';
+    feedbackCategoriasEl.style.display = 'block';
+    categoriasDropdownEl.style.display = 'block';
 
     try {
         const res = await fetch(`${API_URL}/sugestoes-termos`);
@@ -189,31 +192,23 @@ async function abrirModalComCategoriasSugeridas() {
         const termos = await res.json();
 
         if (termos && termos.length > 0) {
-            feedbackCategoriasDinamicasEl.style.display = 'none';
+            feedbackCategoriasEl.style.display = 'none';
             termos.forEach(termo => {
                 const li = document.createElement('li');
                 li.textContent = termo;
                 li.dataset.termo = termo;
-                li.style.padding = '10px';
-                li.style.borderBottom = '1px solid #f0f0f0'; // Cor mais suave
-                li.style.cursor = 'pointer';
-                li.style.transition = 'background-color 0.2s ease';
-                li.addEventListener('mouseover', () => li.style.backgroundColor = '#e9e9e9');
-                li.addEventListener('mouseout', () => li.style.backgroundColor = 'transparent');
-
                 li.addEventListener('click', () => {
                     buscarPostagensPeloTermoSelecionado(termo);
-                    modalCategoriasDinamicasEl.style.display = 'none';
+                    categoriasDropdownEl.style.display = 'none';
                 });
-                listaCategoriasDinamicasUlEl.appendChild(li);
+                listaCategoriasEl.appendChild(li);
             });
         } else {
-            feedbackCategoriasDinamicasEl.textContent = 'Nenhuma categoria sugerida encontrada no momento.';
+            feedbackCategoriasEl.textContent = 'Nenhuma categoria sugerida encontrada.';
         }
     } catch (error) {
-        console.error("Erro ao carregar categorias dinâmicas:", error);
-        feedbackCategoriasDinamicasEl.textContent = 'Erro ao carregar sugestões.';
-        Swal.fire('Erro', `Não foi possível carregar as sugestões: ${error.message}`, 'error');
+        console.error("Erro ao carregar categorias:", error);
+        feedbackCategoriasEl.textContent = 'Erro ao carregar sugestões.';
     }
 }
 
@@ -373,9 +368,37 @@ window.addEventListener('DOMContentLoaded', async () => {
         criarPostBtnEl.addEventListener('click', criarPostagemHandler);
     }
 
-    if (searchButtonEl && userId) { // Só adiciona listener se o botão existir e usuário logado
-        searchButtonEl.addEventListener('click', abrirModalComCategoriasSugeridas);
+    if (mainSearchInputEl && userId) {
+        mainSearchInputEl.addEventListener('focus', mostrarCategoriasSugeridas);
+        mainSearchInputEl.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.trim();
+            if (searchTerm === '') {
+                mostrarCategoriasSugeridas();
+            } else {
+                // Busca por texto livre
+                buscarPostagensPeloTermoSelecionado(searchTerm);
+                categoriasDropdownEl.style.display = 'none';
+            }
+        });
+
+        // Adiciona evento de tecla Enter
+        mainSearchInputEl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const searchTerm = e.target.value.trim();
+                if (searchTerm) {
+                    buscarPostagensPeloTermoSelecionado(searchTerm);
+                    categoriasDropdownEl.style.display = 'none';
+                }
+            }
+        });
     }
+
+    // Fechar dropdown quando clicar fora
+    document.addEventListener('click', (e) => {
+        if (categoriasDropdownEl && !e.target.closest('.search-wrapper')) {
+            categoriasDropdownEl.style.display = 'none';
+        }
+    });
 
     if (closeModalCategoriasDinamicasBtnEl && modalCategoriasDinamicasEl) {
         closeModalCategoriasDinamicasBtnEl.addEventListener('click', () => {
