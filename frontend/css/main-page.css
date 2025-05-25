@@ -729,3 +729,38 @@ textarea {
         max-width: calc(100% - 20px);
     }
 }
+
+.categoria-section {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.categoria-section:last-child {
+    border-bottom: none;
+}
+
+.categoria-section h4 {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0 15px 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.categoria-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.categoria-list li {
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: #333;
+}
+
+.categoria-list li:hover {
+    background-color: #f5f5f5;
+    color: #b82727;
+}

@@ -1,15 +1,18 @@
 package com.achadosperdidos.backend.controller;
 
 // Adicione o import para PostagemDTO e ResponseEntity se for retornar ResponseEntity
-import com.achadosperdidos.backend.dto.PostagemDTO;
-import com.achadosperdidos.backend.model.Postagem; // Pode não ser mais necessário aqui se sempre usar DTO
-import com.achadosperdidos.backend.service.CategoriaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity; // Para ResponseEntity
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Set;
+import java.util.Set; // Pode não ser mais necessário aqui se sempre usar DTO
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping; // Para ResponseEntity
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.achadosperdidos.backend.dto.PostagemDTO;
+import com.achadosperdidos.backend.service.CategoriaService;
 
 @RestController
 @RequestMapping("/postagem")

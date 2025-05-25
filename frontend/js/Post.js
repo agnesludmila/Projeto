@@ -179,36 +179,65 @@ async function mostrarCategoriasSugeridas() {
     }
 
     listaCategoriasEl.innerHTML = '';
-    feedbackCategoriasEl.textContent = 'Carregando sugestões...';
+    feedbackCategoriasEl.textContent = 'Carregando categorias...';
     feedbackCategoriasEl.style.display = 'block';
     categoriasDropdownEl.style.display = 'block';
 
     try {
         const res = await fetch(`${API_URL}/sugestoes-termos`);
         if (!res.ok) {
-            const errorText = await res.text();
-            throw new Error(`Erro ${res.status} ao buscar sugestões: ${errorText}`);
+            throw new Error(`Erro ${res.status} ao buscar categorias`);
         }
-        const termos = await res.json();
+        const categorias = await res.json();
 
-        if (termos && termos.length > 0) {
+        if (categorias && categorias.length > 0) {
             feedbackCategoriasEl.style.display = 'none';
-            termos.forEach(termo => {
+            
+            // Agrupa categorias por tipo
+            const categoriasLocais = ['Biblioteca', 'Refeitório', 'Sala', 'Corredor', 'Banheiro'];
+            const categoriasItens = ['Caderno', 'Casaco', 'Garrafa', 'Eletrônico', 'Caneta', 'Estojo'];
+            
+            // Cria seção de locais
+            const locaisSection = document.createElement('div');
+            locaisSection.className = 'categoria-section';
+            locaisSection.innerHTML = '<h4>Locais</h4>';
+            const locaisList = document.createElement('ul');
+            locaisList.className = 'categoria-list';
+            
+            // Cria seção de itens
+            const itensSection = document.createElement('div');
+            itensSection.className = 'categoria-section';
+            itensSection.innerHTML = '<h4>Itens</h4>';
+            const itensList = document.createElement('ul');
+            itensList.className = 'categoria-list';
+
+            categorias.forEach(categoria => {
                 const li = document.createElement('li');
-                li.textContent = termo;
-                li.dataset.termo = termo;
+                li.textContent = categoria;
+                li.dataset.termo = categoria;
                 li.addEventListener('click', () => {
-                    buscarPostagensPeloTermoSelecionado(termo);
+                    buscarPostagensPeloTermoSelecionado(categoria);
                     categoriasDropdownEl.style.display = 'none';
                 });
-                listaCategoriasEl.appendChild(li);
+
+                if (categoriasLocais.includes(categoria)) {
+                    locaisList.appendChild(li);
+                } else if (categoriasItens.includes(categoria)) {
+                    itensList.appendChild(li);
+                }
             });
+
+            locaisSection.appendChild(locaisList);
+            itensSection.appendChild(itensList);
+            
+            listaCategoriasEl.appendChild(locaisSection);
+            listaCategoriasEl.appendChild(itensSection);
         } else {
-            feedbackCategoriasEl.textContent = 'Nenhuma categoria sugerida encontrada.';
+            feedbackCategoriasEl.textContent = 'Nenhuma categoria encontrada.';
         }
     } catch (error) {
         console.error("Erro ao carregar categorias:", error);
-        feedbackCategoriasEl.textContent = 'Erro ao carregar sugestões.';
+        feedbackCategoriasEl.textContent = 'Erro ao carregar categorias.';
     }
 }
 
