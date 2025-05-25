@@ -10,4 +10,5 @@ public interface PostagemRepository extends JpaRepository<Postagem, Long> {
     List<Postagem> findByUsuarioIdOrderByDataCriacaoDesc(Long usuarioId);
     List<Postagem> findAllByOrderByDataCriacaoDesc();
     List<Postagem> findByUsuarioId(Long usuarioId);
+    List<Postagem> findByTituloContainingIgnoreCaseOrDescricaoContainingIgnoreCase(String tituloTermo, String descricaoTermo);
 }

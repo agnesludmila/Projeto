@@ -1,30 +1,45 @@
 package com.achadosperdidos.backend.controller;
 
-import com.achadosperdidos.backend.model.Postagem;
+// Adicione o import para PostagemDTO e ResponseEntity se for retornar ResponseEntity
+import com.achadosperdidos.backend.dto.PostagemDTO;
+import com.achadosperdidos.backend.model.Postagem; // Pode não ser mais necessário aqui se sempre usar DTO
 import com.achadosperdidos.backend.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity; // Para ResponseEntity
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
-@RequestMapping("/api/categorias")
+@RequestMapping("/postagem")
 public class CategoriaController {
 
     @Autowired
     private CategoriaService categoriaService;
 
-    // Buscar todas as postagens de uma categoria
     @GetMapping("/{nome}/postagens")
-    public List<Postagem> listarPostagensPorCategoria(@PathVariable String nome) {
-        return categoriaService.buscarPorNomeCategoria(nome);
+    public ResponseEntity<List<PostagemDTO>> listarPostagensPorCategoria(@PathVariable String nome) {
+        List<PostagemDTO> dtos = categoriaService.buscarDTOPorNomeCategoria(nome);
+        return ResponseEntity.ok(dtos);
     }
 
-    // Buscar por categoria e usuário
     @GetMapping("/{nome}/usuario/{id}/postagens")
-    public List<Postagem> listarPostagensPorCategoriaEUsuario(
+    public ResponseEntity<List<PostagemDTO>> listarPostagensPorCategoriaEUsuario(
             @PathVariable String nome,
             @PathVariable Long id) {
-        return categoriaService.buscarPorCategoriaEUsuario(nome, id);
+        List<PostagemDTO> dtos = categoriaService.buscarDTOPorCategoriaEUsuario(nome, id);
+        return ResponseEntity.ok(dtos);
+    }
+
+    @GetMapping("/sugestoes-termos")
+    public Set<String> obterSugestoesDeTermos() {
+        return categoriaService.gerarTermosChaveDeTodasPostagens();
+    }
+
+    @GetMapping("/por-termo/{termo}")
+    public ResponseEntity<List<PostagemDTO>> buscarPostagensPorTermoDinamico(@PathVariable String termo) {
+        List<PostagemDTO> dtos = categoriaService.buscarPostagensDTOPorTermoNoConteudo(termo);
+        return ResponseEntity.ok(dtos);
     }
 }
