@@ -170,6 +170,28 @@
     </div>
   </div>
 
+  <template id="postagemTemplate">
+    <div class="post">
+      <div class="post-header">
+        <img src="" alt="Foto do autor" class="autor-foto-post post-template-foto-perfil" />
+        <div class="user-info">
+          <span class="name post-template-nome-usuario">Desconhecido</span>
+          <span class="date post-template-data"></span>
+        </div>
+      </div>
+      <h3 class="post-title post-template-titulo"></h3>
+      <p class="post-description post-template-descricao"></p>
+      <div class="post-media post-template-media" style="display:none;">
+        <img src="" alt="Imagem da postagem" class="post-imagem-principal post-template-caminho-imagem" />
+      </div>
+      <div class="post-actions">
+        <button class="btn-contato post-template-btn-contato">
+          <i class="fas fa-phone"></i> Contato
+        </button>
+      </div>
+    </div>
+  </template>
+
   <script type="module" src="./js/Post.js" defer></script>
 </body>
 </html>
