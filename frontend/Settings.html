@@ -45,7 +45,7 @@
           </a>
         </li>
         <li>
-          <a href="./LoginRegister.html" class="menu-link">
+          <a  id="logoutButton" class="menu-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
               <path d="M16 13v-2H7V8l-5 4 5 4v-3h9zm3-10H5c-1.1 0-2 .9-2 2v6h2V5h14v14H5v-6H3v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
             </svg>
@@ -60,7 +60,6 @@
       <h3>Preferências gerais</h3>
       <ul>
         <li><a href="#" onclick="abrirAba('idioma'); return false;">Idioma <span>&rarr;</span></a></li>
-        <li><a href="#" onclick="abrirAba('fotosPerfil'); return false;">Exibir fotos de perfil <span>&rarr;</span></a></li>
         <li><a href="#" onclick="abrirAba('efeitosSonoros'); return false;">Efeitos sonoros <span>&rarr;</span></a></li>
       </ul>
     </section>
@@ -68,6 +67,7 @@
     <section class="card">
       <h3>Gerenciamento de conta</h3>
       <ul>
+        <li><a href="#" onclick="RedefinirSenha(); return false;">Redefinir senha<span>&rarr;</span></a></li>
         <li><a href="#" onclick="hibernarConta(); return false;">Colocar conta em hibernação <span>&rarr;</span></a></li>
         <li><a href="#" onclick="encerrarConta(); return false;">Encerrar conta <span>&rarr;</span></a></li>
       </ul>
@@ -77,10 +77,6 @@
     <div id="aba-idioma" class="painel oculto">
       <h4>Configurações de Idioma</h4>
       <p>Aqui você pode escolher o idioma do sistema.</p>
-    </div>
-    <div id="aba-fotosPerfil" class="painel oculto">
-      <h4>Exibir fotos de perfil</h4>
-      <p>Configurações para mostrar ou ocultar fotos de perfil.</p>
     </div>
     <div id="aba-efeitosSonoros" class="painel oculto">
       <h4>Efeitos Sonoros</h4>
@@ -94,6 +90,8 @@
 </div>
 
 <script src="js/Settings.js"></script>
+<script type="module" src="./js/Post.js" defer></script>
+<script type="module" src="./js/Sessioncontroll.js" defer></script>
 </body>
 
 </html>

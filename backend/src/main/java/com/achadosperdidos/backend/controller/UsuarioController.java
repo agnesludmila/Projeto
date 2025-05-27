@@ -52,7 +52,6 @@ public class UsuarioController {
         usuario.setToken(UUID.randomUUID().toString());
         Usuario savedUser = usuarioRepository.save(usuario);
 
-        // Cria e salva o perfil vazio imediatamente
         Perfil perfil = new Perfil();
         perfil.setUsuario(savedUser);
         perfilRepository.save(perfil);
@@ -80,7 +79,6 @@ public class UsuarioController {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body(resposta);
             }
 
-            // Checa se já existe perfil *com* foto
             Perfil perfil = usuarioEncontrado.getPerfil();
             boolean fotoVazia = (perfil == null)
                     || (perfil.getFotoPerfil() == null)
@@ -104,5 +102,15 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resposta);
     }
 
+    @GetMapping("/perfil")
+    public ResponseEntity<?> getPerfil(@RequestHeader("Authorization") String token) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findByToken(token);
 
+        if (usuarioOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Token inválido ou usuário não autenticado.");
+        }
+
+        return ResponseEntity.ok(usuarioOptional.get());
+    }
 }

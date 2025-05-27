@@ -7,9 +7,8 @@ import { exibirNotificacao } from './notificacao.js';
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirm-password');
 
-    // Verifica se o token está presente na URL
     if (!token) {
-        exibirNotificacao("⚠️ O link de redefinição é inválido ou expirou.", false);
+        exibirNotificacao("O link de redefinição é inválido ou expirou.", false);
         form.style.display = 'none';
         return;
     }
@@ -46,7 +45,7 @@ import { exibirNotificacao } from './notificacao.js';
             if (response.ok && data.codigo === 0) {
                 exibirNotificacao(data.mensagem || "Senha redefinida com sucesso!");
                 form.reset();
-                setTimeout(() => window.location.href = "/MAP/frontend/LoginRegister.html", 3000);
+                setTimeout(() => window.location.href = "/Projeto/MAP/frontend/LoginRegister.html", 3000);
             } else {
                 exibirNotificacao(data.mensagem || "Erro ao redefinir a senha.", false);
             }

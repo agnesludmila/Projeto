@@ -8,7 +8,7 @@ body,
 html {
   height: 100%;
   font-family: 'Istok Web', sans-serif;
-  background-color: white;
+  background-color: #f4f7fa;
   overflow-x: hidden;
 }
 h2 {
@@ -64,7 +64,7 @@ h2 {
   transition: box-shadow 0.3s ease, transform 0.2s ease;
   cursor: pointer;
   position: relative;
-  margin-right:102px ;
+  margin-right:50px ;
   margin-top: 0;
 }
 
@@ -84,7 +84,7 @@ h2 {
   background-color: #f9f9f9;
   font-family: 'Istok Web', sans-serif;
   color: #333;
-  pointer-events: none; /* para manter como readonly clicável */
+  pointer-events: none;
 }
 
 textarea {
@@ -119,29 +119,8 @@ textarea {
     font-size: 14px;
   }
 }
-
-@media (max-width: 768px) {
-  .post-box textarea {
-    font-size: 10px;
-    height: 56px;
-    padding: 10px 10px;
-  }
-
-  .post-icon {
-    height: 24px;
-    width: 24px;
-    right: 12px;
-  }
-
-  .content-wrapper {
-    width: 100%;
-    margin: 0 auto;
-    flex-direction: column;
-    gap: 10px;
-    border-radius: 20px;
-    display: flex;
-    background-color: #ffffff;
-  }
+.top-header {
+  gap: 50rem;
 }
 
 .modal-overlay {
@@ -384,10 +363,10 @@ textarea {
   overflow: hidden;
   border-radius: 20px;
   margin-bottom: 12px;
-  margin-left: 5px;
+  margin-left: 33px;
 }
 
-@media (max-width: 1024px) and (min-width: 768px) {
+@media (max-width: 1084px) and (min-width: 768px) {
   .feed-container {
     width: 90%;
     margin: 2px auto;

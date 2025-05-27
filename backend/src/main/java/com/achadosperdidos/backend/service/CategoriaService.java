@@ -23,7 +23,7 @@ public class CategoriaService {
     private PostagemRepository postagemRepository;
 
     @Autowired
-    private TagRepository tagRepository; // Nova injeção
+    private TagRepository tagRepository;
 
 
     public List<PostagemDTO> buscarDTOPorCategoriaEUsuario(String nomeCategoria, Long usuarioId) {

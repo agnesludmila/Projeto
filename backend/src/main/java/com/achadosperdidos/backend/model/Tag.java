@@ -12,7 +12,7 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false, length = 50) // Definindo um tamanho e garantindo unicidade
+    @Column(unique = true, nullable = false, length = 50)
     private String nome;
 
     @ManyToMany(mappedBy = "tags")

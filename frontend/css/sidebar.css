@@ -1,7 +1,7 @@
 .sidebar {
     position: fixed;
     top: 70px;
-    width: 310px;
+    width: 300px;
     height: 100vh;
     background-color: #911e1e;
     color: white;
@@ -101,7 +101,7 @@
     word-break: break-word;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1084px) {
     .sidebar {
         position: fixed;
         top: 0;

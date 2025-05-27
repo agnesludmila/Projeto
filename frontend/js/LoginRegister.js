@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const resposta = await response.json();
 
-                // Verifica o código retornado no backend e exibe a notificação apropriada
                 if (response.status === 409) {
                     if (resposta.codigo === 1) {
                         exibirNotificacao("Email já cadastrado!", false);
@@ -100,14 +99,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (resposta.codigo === 0) {
                     localStorage.setItem("usuarioId", resposta.id);
+                    localStorage.setItem("token", resposta.token);
                     exibirNotificacao(resposta.mensagem || "Login bem-sucedido!");
-                    setTimeout(() => window.location.href = "/MAP/frontend/Search.html", 2000);
+                    setTimeout(() => window.location.href = "/Projeto/MAP/frontend/Search.html", 2000);
                 } else if (resposta.codigo === 1) {
                     exibirNotificacao("Por favor, ative a sua conta primeiro!", false);
                 } else if (resposta.codigo === 2) {
                     localStorage.setItem("usuarioId", resposta.id);
                     exibirNotificacao("Criação de perfil necessária.");
-                    setTimeout(() => window.location.href = "/MAP/frontend/Profile.html", 2000);
+                    setTimeout(() => window.location.href = "/Projeto/MAP/frontend/Search.html", 2000);
                 } else {
                     exibirNotificacao(resposta.mensagem || "Email ou senha inválidos!", false);
                 }

@@ -1,13 +1,12 @@
-// ./js/Post.js
+
 const API_URL = 'http://localhost:8080/postagem';
 const userId = localStorage.getItem('usuarioId');
 
-// Elementos da página
 const listaPostagensEl = document.getElementById('lista-postagens');
 const sidebarNomeUsuarioEl = document.querySelector('.sidebar .nome-usuario');
 const sidebarEmailUsuarioEl = document.querySelector('.sidebar .usuario-email');
 const mainSearchInputEl = document.getElementById('searchInput');
-const searchButtonEl = document.getElementById('searchToggle'); // Ícone de lupa
+const searchButtonEl = document.getElementById('searchToggle');
 const categoriasDropdownEl = document.getElementById('categoriasDropdown');
 const listaCategoriasEl = document.getElementById('listaCategorias');
 const feedbackCategoriasEl = document.getElementById('feedbackCategorias');
@@ -26,7 +25,6 @@ const modalCategoriasDinamicasEl = document.getElementById('modalCategoriasDinam
 const closeModalCategoriasDinamicasBtnEl = document.getElementById('closeModalCategoriasDinamicasBtn');
 const logoutButtonEl = document.getElementById('logoutButton');
 
-// Variável global (mantida do seu código)
 let postagens = [];
 
 if (!userId && window.location.pathname.includes("Search.html")) {
@@ -34,7 +32,6 @@ if (!userId && window.location.pathname.includes("Search.html")) {
     // window.location.href = './LoginRegister.html';
 }
 
-// Função Debounce para otimizar buscas no input
 function debounce(func, delay) {
     let timeout;
     return function(...args) {
@@ -86,7 +83,6 @@ function exibirPostagens(lista) {
     }
 
     lista.forEach(postagem => {
-        // console.log("Dados da postagem para template:", postagem);
 
         const clone = template.content.cloneNode(true);
         const postElement = clone.querySelector('.post');
@@ -126,29 +122,21 @@ function exibirPostagens(lista) {
         if(btnContatoEl) {
             btnContatoEl.dataset.postagemId = postagem.id;
             btnContatoEl.dataset.contato = postagem.contato || '';
-            btnContatoEl.dataset.email = postagem.email || ''; // CORRIGIDO: usa postagem.email (do DTO)
+            btnContatoEl.dataset.email = postagem.email || '';
         }
 
         const isDono = Number(postagem.usuarioId) === Number(userId);
         if (isDono && postActionsDivEl) {
-            // Se o template já tiver um botão de apagar (ex: <button class="btn-apagar" style="display:none;">),
-            // você pode apenas mostrá-lo e adicionar o listener.
-            // Caso contrário, crie-o:
-            let btnApagar = postElement.querySelector('.btn-apagar'); // Tenta encontrar no template
-            if (!btnApagar) { // Se não existir no template, cria
+            let btnApagar = postElement.querySelector('.btn-apagar');
+            if (!btnApagar) {
                 btnApagar = document.createElement('button');
                 btnApagar.classList.add('btn-apagar');
                 btnApagar.innerHTML = '<i class="fas fa-trash-alt"></i> Apagar';
                 postActionsDivEl.appendChild(btnApagar);
             }
-            btnApagar.style.display = 'inline-block'; // Garante que está visível
+            btnApagar.style.display = 'inline-block';
             btnApagar.dataset.id = postagem.id;
 
-            // Remove listener antigo para evitar duplicação se o post for re-renderizado
-            // (Mais robusto seria clonar o template sem listeners e adicionar aqui)
-            // Esta abordagem de adicionar listener diretamente aqui é mais simples para o cloneNode(true)
-            // se o botão já não vier com um listener do template.
-            // Para esta estrutura, adicionar listener a cada clone é necessário.
             btnApagar.addEventListener('click', async (e) => {
                 const postId = e.currentTarget.dataset.id;
                 const resultado = await Swal.fire({
@@ -175,7 +163,7 @@ function exibirPostagens(lista) {
             });
         } else if (postActionsDivEl) {
             const btnApagarExistente = postElement.querySelector('.btn-apagar');
-            if (btnApagarExistente) btnApagarExistente.remove(); // Remove se não for dono
+            if (btnApagarExistente) btnApagarExistente.remove();
         }
         listaPostagensEl.appendChild(postElement);
     });
@@ -226,8 +214,6 @@ async function mostrarCategoriasSugeridas() {
                 const li = document.createElement('li');
                 li.textContent = termo;
                 li.dataset.termo = termo;
-                // Adicione classes CSS ou estilos inline conforme preferir
-                // Ex: li.classList.add('sugestao-item');
                 li.style.padding = '8px 12px';
                 li.style.cursor = 'pointer';
                 li.style.borderBottom = '1px solid #f0f0f0';
@@ -252,7 +238,7 @@ async function mostrarCategoriasSugeridas() {
 async function buscarPostagensPeloTermoSelecionado(termo) {
     if (!listaPostagensEl) return;
     listaPostagensEl.innerHTML = `<p style="text-align:center; padding:20px;">Buscando postagens sobre "${termo}"...</p>`;
-    if (mainSearchInputEl && mainSearchInputEl.value !== termo) { // Atualiza o input se a busca veio de um clique
+    if (mainSearchInputEl && mainSearchInputEl.value !== termo) {
         mainSearchInputEl.value = termo;
     }
 
@@ -330,7 +316,7 @@ async function criarPostagemHandler(event) {
     formData.append("titulo", titulo);
     formData.append("descricao", descricao);
     formData.append("usuarioId", String(userId));
-    const categoriaSelecionadaEl = document.getElementById('categoriaPost'); // Supondo que você adicionou este select no HTML
+    const categoriaSelecionadaEl = document.getElementById('categoriaPost');
     if (categoriaSelecionadaEl && categoriaSelecionadaEl.value) {
         formData.append("categoriaId", categoriaSelecionadaEl.value);
     }
@@ -346,7 +332,7 @@ async function criarPostagemHandler(event) {
         tituloInputEl.value = '';
         descricaoInputEl.value = '';
         if (imagemUploadInputEl) imagemUploadInputEl.value = '';
-        if (categoriaSelecionadaEl) categoriaSelecionadaEl.value = ''; // Limpa o select de categoria
+        if (categoriaSelecionadaEl) categoriaSelecionadaEl.value = '';
         if (modalPublicacaoEl) modalPublicacaoEl.style.display = 'none';
 
         Swal.fire('Sucesso!', 'Postagem criada com sucesso!', 'success');
@@ -415,7 +401,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         criarPostBtnEl.addEventListener('click', criarPostagemHandler);
     }
 
-    // Lógica de busca por digitação e Enter
     if (mainSearchInputEl && userId) {
         mainSearchInputEl.addEventListener('focus', mostrarCategoriasSugeridas);
 
@@ -426,7 +411,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 buscarPostagensPeloTermoSelecionado(term);
                 if (categoriasDropdownEl) categoriasDropdownEl.style.display = 'none';
             }
-        }, 700); // Atraso de 700ms para o debounce
+        }, 700);
 
         mainSearchInputEl.addEventListener('input', (e) => {
             const searchTerm = e.target.value.trim().toLowerCase();
@@ -435,15 +420,12 @@ window.addEventListener('DOMContentLoaded', async () => {
 
         mainSearchInputEl.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                e.preventDefault(); // Previne qualquer comportamento padrão do Enter
+                e.preventDefault();
                 const searchTerm = mainSearchInputEl.value.trim();
-                // Cancela qualquer busca debounced (se o debounce retornasse um ID de timeout, limparíamos aqui)
-                // Como não retorna, a busca por Enter será imediata.
                 if (searchTerm) {
                     buscarPostagensPeloTermoSelecionado(searchTerm);
                     if (categoriasDropdownEl) categoriasDropdownEl.style.display = 'none';
                 } else {
-                    // Se Enter com campo vazio, pode recarregar todas ou manter dropdown (se visível)
                     carregarTodasPostagens();
                     if (categoriasDropdownEl) categoriasDropdownEl.style.display = 'none';
                 }
@@ -451,7 +433,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // Listener para o botão de busca (ícone de lupa)
     if(searchButtonEl && mainSearchInputEl && userId) {
         searchButtonEl.addEventListener('click', () => {
             const searchTerm = mainSearchInputEl.value.trim();
@@ -459,23 +440,21 @@ window.addEventListener('DOMContentLoaded', async () => {
                 buscarPostagensPeloTermoSelecionado(searchTerm);
                 if (categoriasDropdownEl) categoriasDropdownEl.style.display = 'none';
             } else {
-                // Se o campo estiver vazio e clicar na lupa, mostra as sugestões
                 mostrarCategoriasSugeridas();
             }
         });
     }
 
-    // Fechar dropdown de categorias quando clicar fora
+
     document.addEventListener('click', (e) => {
         if (categoriasDropdownEl && categoriasDropdownEl.style.display === 'block') {
-            const searchWrapper = e.target.closest('.search-wrapper'); // Seu input e dropdown devem estar dentro de .search-wrapper
+            const searchWrapper = e.target.closest('.search-wrapper');
             if (!searchWrapper) {
                 categoriasDropdownEl.style.display = 'none';
             }
         }
     });
 
-    // Modal de Categorias Dinâmicas (geral, se usado)
     if (closeModalCategoriasDinamicasBtnEl && modalCategoriasDinamicasEl) {
         closeModalCategoriasDinamicasBtnEl.addEventListener('click', () => {
             modalCategoriasDinamicasEl.style.display = 'none';
@@ -519,3 +498,25 @@ window.addEventListener('DOMContentLoaded', async () => {
         }
     }
 });
+document.getElementById("logoutButton").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("usuario");
+    sessionStorage.clear();
+
+
+    window.location.href = "./LoginRegister.html";
+});
+
+window.onload = function () {
+    if (performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD) {
+        window.location.reload(true);
+    }
+};
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+});
+

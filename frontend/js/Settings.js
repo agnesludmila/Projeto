@@ -76,7 +76,6 @@ function hibernarConta() {
     }
 }
 
-// Efeitos sonoros simples
 const audioClick = new Audio('https://www.soundjay.com/buttons/sounds/button-16.mp3'); // Som exemplo
 
 function toggleEfeitosSonoros() {
@@ -84,7 +83,6 @@ function toggleEfeitosSonoros() {
     localStorage.setItem('efeitosSonorosAtivos', checkbox.checked ? 'true' : 'false');
 }
 
-// Aplica efeito sonoro no clique dos links
 document.addEventListener('click', e => {
     if (localStorage.getItem('efeitosSonorosAtivos') === 'true' && e.target.tagName === 'A') {
         audioClick.currentTime = 0;
@@ -100,5 +98,4 @@ window.addEventListener('DOMContentLoaded', () => {
     checkbox.addEventListener('change', toggleEfeitosSonoros);
 });
 
-// Chama ao carregar a página
 window.addEventListener('DOMContentLoaded', carregarPerfil);
